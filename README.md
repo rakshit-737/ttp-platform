@@ -1,21 +1,51 @@
-# TTP — Teacher Training Programme (interactive preview)
+# TTP — Teacher Training Programme
 
-Single-file website preview of the TTP platform (`index.html`). No build step, no dependencies — open it in any browser.
+Learn Business. Work on Real Projects. Think Like a Founder.
 
-Implements the PRD/Implementation Guide: exact menu, hero copy, four differentiator cards, Popular Courses, journey strip, course catalogue with search + category filter, course detail pages (all §11 items), Real Projects with the ABC EdTech worked example, allocation gate (Method A password demo: `ttp-abc`), tasks with deadlines + submission + mentor feedback, mentors page, About/Contact copy verbatim, participant dashboard (§15/§16), certificate preview (§19 fields).
+Interactive preview of the TTP learning platform: courses with quizzes and assignments, simulated ₹ checkout, real startup projects with TTP-controlled allocation, task deadlines with mentor feedback, a participant dashboard and certificate previews. All flows run client-side (localStorage) — no backend, no real payments. The production site is built in WordPress per the TTP Implementation Guide; this app exists to share a working, clickable vision of it.
 
-All flows are simulated in the browser (localStorage). No real payments — checkout is clearly labelled a simulation. The production site is built in WordPress per the Implementation Guide; this preview exists to share a working link.
+## Stack
 
-## Deploy in Google AI Studio (Apps)
+- Vite + React 18 + TypeScript (strict)
+- React Router (hash routing — works on any static host)
+- Tailwind CSS (utilities only) + a hand-written design system in `src/index.css`
+- framer-motion + lucide-react (animated hero in `src/components/ui/prisma-hero.tsx`)
+- `vite-plugin-singlefile` — the production build is one self-contained HTML file
 
-1. Open https://aistudio.google.com → **Apps** (Build).
-2. Create a new app; delete the generated files it doesn't need and paste the entire contents of `index.html` into the app's `index.html` (replace everything).
-3. Press the deploy/share button (Cloud Run deploy) and copy the public link.
+## Structure
 
-Works equally on Netlify Drop / Vercel / GitHub Pages — it is one static file.
+```
+assets/              favicon
+src/
+  components/        Header, Footer, Modal, CourseCard, ProjectDossier
+    ui/              prisma-hero.tsx (WordsPullUp, TTPHero, PrismaHero)
+  data/              courses, projects, mentors (typed catalogue data)
+  pages/             Home, Courses, CourseDetail, Projects, ProjectDetail,
+                     HowItWorks, Mentors, About, Contact, Auth, Dashboard
+  App.tsx            routes + layout
+  store.tsx          app state (context + localStorage) and toasts
+  types.ts           shared types
+  index.css          design tokens and component styles
+```
 
-## Demo shortcuts (for whoever gets the link)
+## Run it
 
-- **Login → "Preview as demo participant"** — loads a sample account: Startup Fundamentals complete (certificate preview), Digital Marketing 60%, allocated to ABC EdTech at 45% with one task reviewed and one awaiting review.
-- **Buy Now** on any course → simulated Razorpay checkout → course appears in dashboard.
-- **Real Projects → ABC EdTech** → allocation password `ttp-abc` (Method A from the guide).
+```bash
+npm install
+npm run dev        # local dev server
+npm run build      # type-check + build → dist/index.html (single file)
+```
+
+## Deploy
+
+**Google AI Studio (Apps):** create an app, replace its files with this repo's (or simply paste the contents of `dist/index.html` after `npm run build` — it is fully self-contained), then deploy and share the link.
+
+**Anywhere static** (Netlify, Vercel, GitHub Pages): serve `dist/`. Hash routing means no server rewrites are needed.
+
+## Demo shortcuts
+
+- **Login → "Preview as demo participant"** — sample account: Startup Fundamentals complete (certificate preview), Digital Marketing at 60%, allocated to the ABC EdTech project at 45% with one task reviewed and one awaiting review.
+- **Buy Now** on any course → simulated Razorpay checkout (clearly labelled; no card fields) → course lands in the dashboard.
+- **Real Projects → ABC EdTech** → allocation password `ttp-abc` (the guide's free Method A, demonstrated).
+
+`legacy/single-file-preview.html` is the earlier hand-written single-file version, kept for reference.
