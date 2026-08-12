@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Star } from 'lucide-react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import Modal from '../components/Modal';
 import { inr } from '../components/CourseCard';
 import { COURSES, REVIEWS } from '../data/courses';
@@ -14,17 +14,28 @@ export default function CourseDetail() {
   const { state, enroll, toast } = useStore();
   const [checkout, setCheckout] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const enrolled = course ? state.enrolled.includes(course.id) : false;
+  const resumeBuy = (location.state as { intent?: string } | null)?.intent === 'buy';
+
+  // guest clicked Buy, registered, and came back: reopen checkout where they left off
+  useEffect(() => {
+    if (resumeBuy && course && state.user && !enrolled) {
+      setCheckout(true);
+      navigate(location.pathname, { replace: true });
+    }
+  }, [resumeBuy, course, state.user, enrolled, navigate, location.pathname]);
 
   if (!course) return <NotFound />;
 
-  const enrolled = state.enrolled.includes(course.id);
   const progress = state.progress[course.id] ?? 0;
   const mentor = MENTORS.find((m) => m.focus.includes(course.category.split(' ')[0])) ?? MENTORS[0];
 
   const buy = () => {
     if (!state.user) {
-      toast('Create an account first — checkout needs a participant login.');
-      navigate('/register');
+      toast('Create a free account — checkout reopens right here when you return.');
+      navigate('/register', { state: { returnTo: `/course/${course.id}`, intent: 'buy' } });
       return;
     }
     setCheckout(true);
@@ -126,8 +137,15 @@ export default function CourseDetail() {
               </ul>
               {enrolled ? (
                 <>
-                  <div className="meter" aria-label={`Progress ${progress}%`}>
-                    <i style={{ width: `${progress}%` }} />
+                  <div
+                    className="meter"
+                    role="progressbar"
+                    aria-valuenow={progress}
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    aria-label={`Progress ${progress}%`}
+                  >
+                    <i style={{ transform: `scaleX(${progress / 100})` }} />
                   </div>
                   <p className="meta mono">{progress}% complete</p>
                   <Link className="btn btn--block" to="/dashboard">

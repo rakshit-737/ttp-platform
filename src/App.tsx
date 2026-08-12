@@ -29,7 +29,7 @@ export default function App() {
     <StoreProvider>
       <ScrollToTop />
       <Header />
-      <main>
+      <main id="main" tabIndex={-1} style={{ outline: 'none' }}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/courses" element={<Courses />} />

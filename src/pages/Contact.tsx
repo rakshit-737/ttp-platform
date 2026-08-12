@@ -5,10 +5,12 @@ import { useStore } from '../store';
 export default function Contact() {
   const { addEntry, toast } = useStore();
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
+  const [sentTo, setSentTo] = useState<string | null>(null);
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
     addEntry(form);
+    setSentTo(form.email);
     setForm({ name: '', email: '', phone: '', message: '' });
     toast('Message sent. TTP replies to your email within a working day.');
   };
@@ -22,6 +24,11 @@ export default function Contact() {
             Phone 9109563282 · Email teachertrainingprogramme3@gmail.com · Location Bhopal, Madhya Pradesh, India
           </p>
         </div>
+        {sentTo && (
+          <div className="note" style={{ marginBottom: 18 }} role="status">
+            <b>Message sent.</b> TTP replies to <b>{sentTo}</b> within a working day.
+          </div>
+        )}
         <form className="panel form-stack" onSubmit={submit}>
           <label className="field">
             Name
@@ -38,10 +45,9 @@ export default function Contact() {
             />
           </label>
           <label className="field">
-            Phone
+            Phone (optional)
             <input
               type="tel"
-              required
               autoComplete="tel"
               value={form.phone}
               onChange={(e) => setForm({ ...form, phone: e.target.value })}

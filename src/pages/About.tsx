@@ -1,4 +1,4 @@
-const JOURNEY = ['Learn', 'Apply', 'Work on Real Problems', 'Get Guidance', 'Build Experience'];
+const JOURNEY = ['Learn', 'Apply', 'Work on Real Projects', 'Get Guidance', 'Gain Experience'];
 
 export default function About() {
   return (

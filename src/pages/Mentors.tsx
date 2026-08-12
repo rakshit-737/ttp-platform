@@ -31,7 +31,7 @@ export default function Mentors() {
                 </div>
               </div>
               <p style={{ fontSize: '0.94rem', color: 'var(--ink-soft)' }}>{m.bio}</p>
-              <p className="meta mono" style={{ fontSize: '0.72rem', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+              <p className="meta mono" style={{ fontSize: '0.78rem' }}>
                 {m.focus} · Q&amp;A in every course · Weekly Google Meet
               </p>
             </div>

@@ -46,6 +46,15 @@ export default function Modal({ onClose, children }: ModalProps) {
     };
   }, [onClose]);
 
+  useEffect(() => {
+    const box = boxRef.current;
+    const heading = box?.querySelector('h3');
+    if (box && heading) {
+      if (!heading.id) heading.id = 'modal-title';
+      box.setAttribute('aria-labelledby', heading.id);
+    }
+  }, [children]);
+
   return (
     <div
       className="overlay"

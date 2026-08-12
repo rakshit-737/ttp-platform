@@ -9,7 +9,7 @@ export default function Footer() {
         </p>
         <div className="footer__cols">
           <div>
-            <h4>TTP — Teacher Training Programme</h4>
+            <h3>TTP — Teacher Training Programme</h3>
             <p>
               Founder education with a second act:
               <br />
@@ -17,7 +17,7 @@ export default function Footer() {
             </p>
           </div>
           <div>
-            <h4>Quick links</h4>
+            <h3>Quick links</h3>
             <ul>
               <li>
                 <Link to="/courses">Courses</Link>
@@ -31,7 +31,7 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h4>Contact</h4>
+            <h3>Contact</h3>
             <p>
               9109563282
               <br />

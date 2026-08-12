@@ -114,8 +114,18 @@ a.no-underline:hover { text-decoration: none; }
 .btn--ghost:hover { background: var(--ink); color: var(--paper); }
 .btn--sm { padding: 7px 14px; font-size: 0.86rem; }
 .btn--block { width: 100%; }
+.btn:active:not([disabled]) { transform: translateY(1px); }
 .btn[disabled] { opacity: 0.45; cursor: not-allowed; }
 .btn[disabled]:hover { background: var(--navy); }
+
+/* ---------- skip link ---------- */
+.skip-link {
+  position: fixed; left: 12px; top: -52px; z-index: 300;
+  background: var(--ink); color: var(--paper);
+  padding: 10px 18px; border-radius: 0 0 6px 6px;
+  font-size: 0.88rem; font-weight: 600;
+}
+.skip-link:focus { top: 0; }
 
 /* ---------- header ---------- */
 .hdr {
@@ -182,8 +192,8 @@ a.no-underline:hover { text-decoration: none; }
 }
 .dossier::before {
   content: attr(data-tab);
-  position: absolute; top: -27px; left: -1.5px;
-  font-family: var(--font-mono); font-size: 0.66rem; font-weight: 600;
+  position: absolute; top: -29px; left: -1.5px;
+  font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; line-height: 1.45;
   letter-spacing: 0.12em; text-transform: uppercase;
   background: var(--ink); color: var(--paper);
   border: 1.5px solid var(--ink); border-bottom: none;
@@ -195,15 +205,15 @@ a.no-underline:hover { text-decoration: none; }
   font-size: 1.45rem; letter-spacing: -0.02em; line-height: 1.1;
 }
 .dossier--hover:hover { box-shadow: var(--shadow); }
-.fieldlist { display: grid; grid-template-columns: 96px 1fr; gap: 8px 16px; font-size: 0.9rem; }
+.fieldlist { display: grid; grid-template-columns: 104px 1fr; gap: 8px 16px; font-size: 0.9rem; }
 .fieldlist dt {
-  font-family: var(--font-mono); font-size: 0.66rem; font-weight: 600;
+  font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600;
   letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
   padding-top: 3px;
 }
 .fieldlist dd { color: var(--ink-soft); }
 .stamp {
-  font-family: var(--font-mono); font-size: 0.68rem; font-weight: 600;
+  font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600;
   letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--saffron-text); border: 1.5px solid var(--saffron);
   border-radius: 3px; padding: 4px 10px;
@@ -243,7 +253,7 @@ a.no-underline:hover { text-decoration: none; }
   font-family: var(--font-mono); font-weight: 600; font-size: 0.78rem;
   color: var(--saffron-text); letter-spacing: 0.08em;
 }
-.course-card__cat { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-align: right; }
+.course-card__cat { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-align: right; }
 .course-card h3 {
   font-family: var(--font-display); font-weight: 700; font-size: 1.28rem;
   letter-spacing: -0.015em; line-height: 1.15;
@@ -310,10 +320,10 @@ a.no-underline:hover { text-decoration: none; }
   padding: 11px 18px; border-top: 1px solid var(--line); font-size: 0.9rem;
 }
 .topic .k {
-  font-family: var(--font-mono); font-size: 0.62rem; font-weight: 600;
+  font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600;
   letter-spacing: 0.08em; text-transform: uppercase;
   border: 1px solid var(--line); border-radius: 3px;
-  padding: 2px 7px; color: var(--muted); flex: none; min-width: 78px; text-align: center;
+  padding: 2px 7px; color: var(--muted); flex: none; min-width: 88px; text-align: center;
 }
 .topic .k--assignment { color: var(--saffron); border-color: var(--saffron); }
 
@@ -323,7 +333,7 @@ a.no-underline:hover { text-decoration: none; }
 .stat .l { font-size: 0.8rem; color: var(--muted); font-weight: 500; }
 
 .meter { height: 7px; border-radius: 99px; background: var(--paper-wash); border: 1px solid var(--line); overflow: hidden; }
-.meter i { display: block; height: 100%; background: var(--navy); }
+.meter i { display: block; height: 100%; width: 100%; background: var(--navy); transform-origin: left; }
 
 .task-row {
   display: flex; align-items: center; justify-content: space-between; gap: 14px;
@@ -348,7 +358,7 @@ a.no-underline:hover { text-decoration: none; }
 .msg--me { align-self: flex-end; background: var(--navy); color: #fff; border-bottom-right-radius: 3px; }
 .msg--them { align-self: flex-start; background: var(--paper-wash); border: 1px solid var(--line); border-bottom-left-radius: 3px; }
 .msg .who {
-  display: block; font-family: var(--font-mono); font-size: 0.6rem; font-weight: 600;
+  display: block; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 600;
   letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; margin-bottom: 3px;
 }
 
@@ -447,8 +457,11 @@ a.no-underline:hover { text-decoration: none; }
   letter-spacing: 0.2em; pointer-events: none;
 }
 .cert .cn { font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; margin: 6px 0 2px; letter-spacing: -0.02em; }
+.cert__stamp {
+  position: absolute; top: 16px; right: 14px; transform: rotate(8deg);
+}
 .cert__label {
-  display: block; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600;
+  display: block; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600;
   letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft);
 }
 .cert .sig { margin-top: 22px; display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--muted); font-family: var(--font-mono); }
@@ -473,11 +486,11 @@ a.no-underline:hover { text-decoration: none; }
 .footer__word {
   font-family: var(--font-display); font-weight: 800;
   font-size: clamp(1.6rem, 4vw, 2.6rem); letter-spacing: -0.02em;
-  margin-bottom: 34px; line-height: 1.1;
+  margin-bottom: 34px; line-height: 1.22;
 }
 .footer__word em { font-style: normal; color: var(--saffron); }
 .footer__cols { display: flex; justify-content: space-between; gap: 28px; flex-wrap: wrap; border-top: 1px solid rgba(251, 250, 247, 0.18); padding-top: 30px; }
-.footer h4 { font-family: var(--font-body); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(251, 250, 247, 0.6); margin-bottom: 8px; }
+.footer h3 { font-family: var(--font-body); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(251, 250, 247, 0.6); margin-bottom: 8px; }
 .footer p, .footer a { font-size: 0.88rem; color: rgba(251, 250, 247, 0.85); }
 .footer a:hover { color: #fff; }
 .footer ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
@@ -497,8 +510,13 @@ a.no-underline:hover { text-decoration: none; }
   }
   .nav.open { display: block; }
   .nav ul { flex-direction: column; gap: 2px; }
+  .nav a { padding: 12px; }
   .nav a.active { box-shadow: inset 3px 0 0 var(--saffron); border-radius: 0 4px 4px 0; }
   .menu-toggle { display: block; margin-left: auto; }
+}
+.nav__auth { display: none; }
+@media (max-width: 640px) {
+  .nav__auth { display: block; border-top: 1px solid var(--line); margin-top: 8px; padding-top: 8px; }
 }
 @media (max-width: 640px) {
   .grid--2, .grid--3, .grid--4 { grid-template-columns: 1fr; }
@@ -512,8 +530,36 @@ a.no-underline:hover { text-decoration: none; }
   .hero { padding: 52px 0 48px; }
 }
 
+/* ---------- motion (all gated on OS preference) ----------
+   One authored idea: paperwork. Stamps press in; sheets rise into
+   place; ink meters draw. Feedback stays ≤220ms, arrivals ≤450ms. */
 @media (prefers-reduced-motion: no-preference) {
   .btn, .course-card, .dossier--hover, .filterbar button, .nav a {
     transition: background 0.15s, border-color 0.15s, box-shadow 0.15s, color 0.15s;
   }
+
+  @keyframes overlay-in {
+    from { opacity: 0; }
+  }
+  @keyframes sheet-in {
+    from { opacity: 0; transform: translateY(14px) scale(0.985); }
+  }
+  @keyframes toast-in {
+    from { opacity: 0; transform: translate(-50%, 12px); }
+  }
+  @keyframes stamp-in {
+    0% { opacity: 0; transform: rotate(-2deg) scale(1.14); }
+    60% { opacity: 1; transform: rotate(-2deg) scale(0.98); }
+    100% { opacity: 1; transform: rotate(-2deg) scale(1); }
+  }
+  @keyframes nav-in {
+    from { opacity: 0; transform: translateY(-6px); }
+  }
+
+  .overlay { animation: overlay-in 0.15s ease-out; }
+  .modal { animation: sheet-in 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
+  .toast { animation: toast-in 0.22s cubic-bezier(0.16, 1, 0.3, 1); }
+  .stamp { animation: stamp-in 0.32s cubic-bezier(0.16, 1, 0.3, 1) 0.15s backwards; }
+  .nav.open { animation: nav-in 0.18s ease-out; }
+  .meter i { transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1); }
 }

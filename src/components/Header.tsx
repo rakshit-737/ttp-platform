@@ -27,12 +27,29 @@ export default function Header() {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setOpen(false);
     };
+    const onPress = (e: MouseEvent) => {
+      if (!(e.target as HTMLElement).closest('.hdr')) setOpen(false);
+    };
     document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
+    document.addEventListener('mousedown', onPress);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('mousedown', onPress);
+    };
   }, [open]);
 
   return (
     <header className="hdr">
+      <a
+        className="skip-link"
+        href="#main"
+        onClick={(e) => {
+          e.preventDefault();
+          document.getElementById('main')?.focus();
+        }}
+      >
+        Skip to content
+      </a>
       <div className="wrap hdr__in">
         <Link className="brand" to="/">
           <span className="brand__mark">TTP</span>
@@ -56,6 +73,9 @@ export default function Header() {
                 </NavLink>
               </li>
             ))}
+            <li className="nav__auth">
+              <NavLink to={state.user ? '/dashboard' : '/login'}>{state.user ? 'Dashboard' : 'Login'}</NavLink>
+            </li>
           </ul>
         </nav>
         <div className="hdr__cta">

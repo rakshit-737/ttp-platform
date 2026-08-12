@@ -64,14 +64,34 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const toast = useCallback((msg: string) => {
     setToastMsg(msg);
     if (timer.current) clearTimeout(timer.current);
-    timer.current = setTimeout(() => setToastMsg(null), 2800);
+    // reading time scales with length; short confirmations still linger 3.2s
+    timer.current = setTimeout(() => setToastMsg(null), Math.max(3200, 1800 + msg.length * 45));
   }, []);
 
   const login = useCallback((name: string, email: string) => {
-    setState((s) => ({ ...s, user: { name, email } }));
+    setState((s) => {
+      try {
+        const raw = localStorage.getItem(`${KEY}:${email.toLowerCase()}`);
+        if (raw) return { ...BLANK, ...(JSON.parse(raw) as Partial<AppState>), user: { name, email } };
+      } catch {
+        /* corrupt or unavailable archive — fall through to a fresh session */
+      }
+      return { ...s, user: { name, email } };
+    });
   }, []);
 
-  const logout = useCallback(() => setState({ ...BLANK }), []);
+  const logout = useCallback(() => {
+    setState((s) => {
+      if (s.user?.email) {
+        try {
+          localStorage.setItem(`${KEY}:${s.user.email.toLowerCase()}`, JSON.stringify({ ...s, user: null }));
+        } catch {
+          /* private mode — nothing to archive */
+        }
+      }
+      return { ...BLANK };
+    });
+  }, []);
 
   const seedDemo = useCallback(() => {
     setState({

@@ -22,6 +22,8 @@ export default function Dashboard() {
   const [taskText, setTaskText] = useState('');
   const [taskFile, setTaskFile] = useState('');
   const [qaText, setQaText] = useState('');
+  const [confirmLogout, setConfirmLogout] = useState(false);
+  const [confirmingSubmit, setConfirmingSubmit] = useState(false);
 
   useEffect(() => {
     if (!state.user) navigate('/login', { replace: true });
@@ -40,6 +42,7 @@ export default function Dashboard() {
     setOpenTask(null);
     setTaskText('');
     setTaskFile('');
+    setConfirmingSubmit(false);
   };
 
   const project = PROJECTS.find((p) => state.allocated.includes(p.id));
@@ -58,6 +61,10 @@ export default function Dashboard() {
   const doSubmitTask = (e: FormEvent) => {
     e.preventDefault();
     if (!openTask) return;
+    if (!confirmingSubmit) {
+      setConfirmingSubmit(true);
+      return;
+    }
     submitTask(openTask.id, taskText + (taskFile ? ` [file: ${taskFile}]` : ''));
     closeTask();
     toast('Work submitted — your mentor reviews it and feedback appears on this task.');
@@ -73,7 +80,12 @@ export default function Dashboard() {
   };
 
   const certCourse = certFor ? COURSES.find((c) => c.id === certFor) : null;
-  const certId = certFor ? 'TTP-2026-' + (1000 + (certFor.length * 137) % 9000) : '';
+  // per-participant, per-course id: stable across visits, distinct across people
+  const certSeed = certFor ? `${certFor}:${state.user.email.toLowerCase()}` : '';
+  const certId = certFor
+    ? 'TTP-2026-' +
+      (1000 + (Math.abs([...certSeed].reduce((a, ch) => (a * 31 + ch.charCodeAt(0)) | 0, 7)) % 9000))
+    : '';
 
   return (
     <section className="sec">
@@ -83,14 +95,7 @@ export default function Dashboard() {
             <h1 className="sec-title">Hello, {state.user.name.split(' ')[0]}</h1>
             <p className="meta">Your participant dashboard — courses, project and mentor in one place.</p>
           </div>
-          <button
-            className="btn btn--ghost btn--sm"
-            onClick={() => {
-              logout();
-              toast('Logged out.');
-              navigate('/');
-            }}
-          >
+          <button className="btn btn--ghost btn--sm" onClick={() => setConfirmLogout(true)}>
             Log out
           </button>
         </div>
@@ -127,14 +132,24 @@ export default function Dashboard() {
                   <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.12rem', letterSpacing: '-0.01em' }}>
                     {c!.title}
                   </h3>
-                  <div className="meter">
-                    <i style={{ width: `${p}%` }} />
+                  <div
+                    className="meter"
+                    role="progressbar"
+                    aria-valuenow={p}
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    aria-label={`${c!.title} progress`}
+                  >
+                    <i style={{ transform: `scaleX(${p / 100})` }} />
                   </div>
                   <p className="meta mono">{p}% complete</p>
                   {p >= 100 ? (
-                    <button className="btn btn--ghost btn--sm" onClick={() => setCertFor(c!.id)}>
-                      View certificate
-                    </button>
+                    <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+                      <span className="stamp stamp--ok">Completed</span>
+                      <button className="btn btn--ghost btn--sm" onClick={() => setCertFor(c!.id)}>
+                        View certificate
+                      </button>
+                    </div>
                   ) : (
                     <button
                       className="btn btn--sm"
@@ -176,8 +191,15 @@ export default function Dashboard() {
                 <p className="meta mono" style={{ marginBottom: 6 }}>
                   Project progress: {projProgress}%
                 </p>
-                <div className="meter">
-                  <i style={{ width: `${projProgress}%` }} />
+                <div
+                  className="meter"
+                  role="progressbar"
+                  aria-valuenow={projProgress}
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                  aria-label={`${project.name} project progress`}
+                >
+                  <i style={{ transform: `scaleX(${projProgress / 100})` }} />
                 </div>
               </div>
               <p className="meta">
@@ -308,9 +330,30 @@ export default function Dashboard() {
                       onChange={(e) => setTaskFile(e.target.value)}
                     />
                   </label>
-                  <button className="btn btn--block" type="submit">
-                    Submit Work
-                  </button>
+                  {confirmingSubmit ? (
+                    <>
+                      <div className="note">
+                        Submit this work? It goes to your mentor for grading and can't be edited afterwards.
+                      </div>
+                      <div style={{ display: 'flex', gap: 10 }}>
+                        <button className="btn" type="submit" style={{ flex: 1 }}>
+                          Confirm submission
+                        </button>
+                        <button
+                          className="btn btn--ghost"
+                          type="button"
+                          style={{ flex: 1 }}
+                          onClick={() => setConfirmingSubmit(false)}
+                        >
+                          Keep editing
+                        </button>
+                      </div>
+                    </>
+                  ) : (
+                    <button className="btn btn--block" type="submit">
+                      Submit Work
+                    </button>
+                  )}
                 </form>
               )}
             </Modal>
@@ -322,6 +365,9 @@ export default function Dashboard() {
           <h3>Certificate</h3>
           <div className="cert">
             <div className="wm">PREVIEW</div>
+            <span className="cert__stamp">
+              <span className="stamp stamp--ok">Earned</span>
+            </span>
             <span className="brand__mark" style={{ margin: '0 auto 12px' }}>
               TTP
             </span>
@@ -342,9 +388,36 @@ export default function Dashboard() {
             </div>
           </div>
           <p className="meta" style={{ marginTop: 14 }}>
-            Production certificates are issued automatically by Tutor LMS Pro with all six required fields and verify
-            by ID.
+            In production, certificates are issued automatically with every required field and can be verified by
+            their certificate ID.
           </p>
+        </Modal>
+      )}
+
+      {confirmLogout && (
+        <Modal onClose={() => setConfirmLogout(false)}>
+          <h3>Log out?</h3>
+          <p style={{ fontSize: '0.95rem', marginBottom: 18 }}>
+            Your courses, progress and submissions are saved in this browser under {state.user.email} and return the
+            next time you log in with the same email.
+          </p>
+          <div style={{ display: 'flex', gap: 10 }}>
+            <button
+              className="btn"
+              style={{ flex: 1 }}
+              onClick={() => {
+                setConfirmLogout(false);
+                logout();
+                toast('Logged out — your progress is saved for your next login.');
+                navigate('/');
+              }}
+            >
+              Log out
+            </button>
+            <button className="btn btn--ghost" style={{ flex: 1 }} onClick={() => setConfirmLogout(false)}>
+              Stay logged in
+            </button>
+          </div>
         </Modal>
       )}
     </section>

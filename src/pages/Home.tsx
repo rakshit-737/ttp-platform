@@ -21,6 +21,7 @@ export default function Home() {
 
       <section className="sec">
         <div className="wrap">
+          <h2 className="sr-only">What TTP offers</h2>
           <div className="grid grid--4">
             {PILLARS.map((p) => (
               <div className="pillar" key={p.t}>

@@ -7,8 +7,10 @@ import NotFound from './NotFound';
 export default function ProjectDetail() {
   const { id } = useParams();
   const project = PROJECTS.find((p) => p.id === id);
-  const { state, allocate, toast } = useStore();
+  const { state, allocate, addEntry, toast } = useStore();
   const [pw, setPw] = useState('');
+  const [notifyEmail, setNotifyEmail] = useState('');
+  const [notified, setNotified] = useState(false);
   const navigate = useNavigate();
 
   if (!project) return <NotFound />;
@@ -115,13 +117,44 @@ export default function ProjectDetail() {
                   </form>
                   <p className="meta">
                     Preview build: the password is <b className="mono">ttp-abc</b>. In production, TTP shares the
-                    password-protected link only with chosen participants (or enrols them directly with Tutor LMS Pro).
+                    password-protected link only with chosen participants, or enrols them directly.
                   </p>
                 </>
+              ) : notified ? (
+                <div className="note">
+                  Noted — TTP will contact <b>{notifyEmail}</b> when {project.name} opens for allocation.
+                </div>
               ) : (
-                <button className="btn btn--block" disabled>
-                  Allocation not yet open
-                </button>
+                <form
+                  className="form-stack"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    addEntry({
+                      name: state.user?.name ?? 'Waitlist',
+                      email: notifyEmail,
+                      phone: '',
+                      message: `Allocation waitlist: ${project.name}`,
+                    });
+                    setNotified(true);
+                    toast(`On the list — TTP contacts you when ${project.name} opens.`);
+                  }}
+                >
+                  <label className="field">
+                    Email for allocation updates
+                    <input
+                      type="email"
+                      required
+                      autoComplete="email"
+                      placeholder="you@example.com"
+                      value={notifyEmail}
+                      onChange={(e) => setNotifyEmail(e.target.value)}
+                    />
+                  </label>
+                  <button className="btn btn--block" type="submit">
+                    Notify me when allocation opens
+                  </button>
+                  <p className="meta">Allocation is not open yet. (Preview build: your email is saved in this browser only.)</p>
+                </form>
               )}
             </div>
           </aside>

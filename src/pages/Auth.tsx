@@ -1,22 +1,33 @@
 import { useState } from 'react';
 import type { FormEvent } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useStore } from '../store';
+
+interface AuthRouteState {
+  returnTo?: string;
+  intent?: string;
+}
 
 export default function Auth({ mode }: { mode: 'login' | 'register' }) {
   const isReg = mode === 'register';
   const { login, seedDemo, toast } = useStore();
   const navigate = useNavigate();
+  const location = useLocation();
+  const routeState = (location.state ?? null) as AuthRouteState | null;
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
+
+  // where to land after auth: back to an interrupted flow, else the dashboard
+  const destination = routeState?.returnTo ?? '/dashboard';
+  const destinationState = routeState?.intent ? { intent: routeState.intent } : undefined;
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
     const finalName = isReg ? name : email.split('@')[0] || 'Participant';
     login(finalName.charAt(0).toUpperCase() + finalName.slice(1), email);
     toast(isReg ? 'Account created — welcome to TTP.' : 'Logged in.');
-    navigate('/dashboard');
+    navigate(destination, { state: destinationState });
   };
 
   return (
@@ -45,11 +56,12 @@ export default function Auth({ mode }: { mode: 'login' | 'register' }) {
               <input
                 type="password"
                 required
-                minLength={4}
+                minLength={6}
                 autoComplete={isReg ? 'new-password' : 'current-password'}
                 value={pw}
                 onChange={(e) => setPw(e.target.value)}
               />
+              {isReg && <span className="meta" style={{ fontWeight: 400 }}>At least 6 characters.</span>}
             </label>
             <button className="btn btn--block" type="submit">
               {isReg ? 'Create account' : 'Login'}
@@ -58,11 +70,17 @@ export default function Auth({ mode }: { mode: 'login' | 'register' }) {
           <p className="meta" style={{ margin: '16px 0 10px', textAlign: 'center' }}>
             {isReg ? (
               <>
-                Already have an account? <Link to="/login">Login</Link>
+                Already have an account?{' '}
+                <Link to="/login" state={routeState ?? undefined}>
+                  Login
+                </Link>
               </>
             ) : (
               <>
-                New to TTP? <Link to="/register">Get Started</Link>
+                New to TTP?{' '}
+                <Link to="/register" state={routeState ?? undefined}>
+                  Get Started
+                </Link>
               </>
             )}
           </p>
@@ -72,7 +90,7 @@ export default function Auth({ mode }: { mode: 'login' | 'register' }) {
             onClick={() => {
               seedDemo();
               toast('Demo participant loaded.');
-              navigate('/dashboard');
+              navigate(destination, { state: destinationState });
             }}
           >
             Preview as demo participant
