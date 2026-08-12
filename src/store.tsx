@@ -138,9 +138,14 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     setState((s) => {
       const rec: TaskRecord = { status: 'submitted', submission };
       const proj = PROJECTS.find((p) => p.tasks.some((t) => t.id === taskId));
-      const projProgress = proj
-        ? { ...s.projProgress, [proj.id]: Math.min(100, (s.projProgress[proj.id] ?? 0) + 15) }
-        : s.projProgress;
+      let projProgress = s.projProgress;
+      if (proj) {
+        const allDone = proj.tasks.every((t) => t.id === taskId || s.tasks[t.id]);
+        projProgress = {
+          ...s.projProgress,
+          [proj.id]: allDone ? 100 : Math.min(100, (s.projProgress[proj.id] ?? 0) + 15),
+        };
+      }
       return { ...s, tasks: { ...s.tasks, [taskId]: rec }, projProgress };
     });
   }, []);

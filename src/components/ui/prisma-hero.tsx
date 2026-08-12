@@ -1,4 +1,4 @@
-import { motion, useInView } from 'framer-motion';
+import { MotionConfig, motion, useInView } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
@@ -90,6 +90,7 @@ export const WordsPullUpMultiStyle = ({ segments, className = '', style }: Words
    No background video — the subject is coursework, not showreel. */
 export const TTPHero = () => {
   return (
+    <MotionConfig reducedMotion="user">
     <section className="w-full px-3 pt-3 sm:px-4 sm:pt-4">
       <div
         className="relative w-full overflow-hidden rounded-2xl md:rounded-[2rem]"
@@ -122,8 +123,8 @@ export const TTPHero = () => {
           </span>
         </div>
 
-        {/* hero content */}
-        <div className="relative flex h-full min-h-[inherit] flex-col justify-end px-4 pb-4 sm:px-6 md:px-10" style={{ minHeight: 'min(88vh, 820px)' }}>
+        {/* hero content — top padding keeps the wordmark clear of the mono strip on short viewports */}
+        <div className="relative flex h-full min-h-[inherit] flex-col justify-end px-4 pb-4 pt-16 sm:px-6 sm:pt-20 md:px-10" style={{ minHeight: 'min(88vh, 820px)' }}>
           <div className="grid grid-cols-12 items-end gap-4">
             <div className="col-span-12 lg:col-span-7">
               <h1
@@ -200,6 +201,7 @@ export const TTPHero = () => {
         </div>
       </div>
     </section>
+    </MotionConfig>
   );
 };
 

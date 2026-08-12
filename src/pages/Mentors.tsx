@@ -12,7 +12,7 @@ export default function Mentors() {
     <section className="sec">
       <div className="wrap">
         <div className="sec__head">
-          <h2 className="sec-title">Learn under experienced mentors.</h2>
+          <h1 className="sec-title">Learn under experienced mentors.</h1>
           <p className="lede">
             Every TTP participant has an assigned mentor who reviews assignments, gives feedback on project work, and
             conducts guidance sessions.
@@ -24,9 +24,9 @@ export default function Mentors() {
               <div style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
                 <span className="avatar">{initials(m.name)}</span>
                 <div>
-                  <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.15rem', letterSpacing: '-0.01em' }}>
+                  <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.15rem', letterSpacing: '-0.01em' }}>
                     {m.name}
-                  </h3>
+                  </h2>
                   <p className="meta">{m.title}</p>
                 </div>
               </div>

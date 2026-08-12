@@ -6,7 +6,7 @@ export default function Projects() {
     <section className="sec">
       <div className="wrap">
         <div className="sec__head">
-          <h2 className="sec-title">Work on real startup problems.</h2>
+          <h1 className="sec-title">Work on real startup problems.</h1>
           <p className="lede">
             TTP's biggest difference from a normal course platform: after learning, you are assigned to a real startup
             project, work on real business problems in a team, and receive mentor feedback on real work.

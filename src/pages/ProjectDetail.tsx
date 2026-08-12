@@ -92,19 +92,27 @@ export default function ProjectDetail() {
                 </Link>
               ) : open ? (
                 <>
-                  <label className="field">
-                    Allocation password
-                    <input
-                      type="password"
-                      value={pw}
-                      onChange={(e) => setPw(e.target.value)}
-                      placeholder="Shared by TTP with your link"
-                      autoComplete="off"
-                    />
-                  </label>
-                  <button className="btn btn--block" onClick={tryAllocate}>
-                    Enrol with allocation password
-                  </button>
+                  <form
+                    className="form-stack"
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      tryAllocate();
+                    }}
+                  >
+                    <label className="field">
+                      Allocation password
+                      <input
+                        type="password"
+                        value={pw}
+                        onChange={(e) => setPw(e.target.value)}
+                        placeholder="Shared by TTP with your link"
+                        autoComplete="off"
+                      />
+                    </label>
+                    <button className="btn btn--block" type="submit">
+                      Enrol with allocation password
+                    </button>
+                  </form>
                   <p className="meta">
                     Preview build: the password is <b className="mono">ttp-abc</b>. In production, TTP shares the
                     password-protected link only with chosen participants (or enrols them directly with Tutor LMS Pro).

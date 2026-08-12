@@ -23,9 +23,9 @@ export default function Auth({ mode }: { mode: 'login' | 'register' }) {
     <section className="sec sec--wash" style={{ minHeight: '62vh' }}>
       <div className="wrap">
         <div className="auth-card">
-          <h2 className="sec-title" style={{ marginBottom: 4 }}>
+          <h1 className="sec-title" style={{ marginBottom: 4 }}>
             {isReg ? 'Get Started' : 'Login'}
-          </h2>
+          </h1>
           <p className="meta" style={{ marginBottom: 20 }}>
             {isReg ? 'Create your TTP participant account.' : 'Welcome back to TTP.'}
           </p>

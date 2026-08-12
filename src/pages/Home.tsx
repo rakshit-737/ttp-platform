@@ -24,7 +24,7 @@ export default function Home() {
           <div className="grid grid--4">
             {PILLARS.map((p) => (
               <div className="pillar" key={p.t}>
-                <h3>{p.t}</h3>
+                <h2>{p.t}</h2>
                 <p>{p.d}</p>
               </div>
             ))}

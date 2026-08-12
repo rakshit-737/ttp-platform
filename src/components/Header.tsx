@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useStore } from '../store';
 
 const ITEMS = [
@@ -16,32 +16,42 @@ const ITEMS = [
 export default function Header() {
   const { state } = useStore();
   const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [open]);
 
   return (
     <header className="hdr">
       <div className="wrap hdr__in">
         <Link className="brand" to="/">
           <span className="brand__mark">TTP</span>
-          <span>Teacher Training Programme</span>
+          <span className="brand__word">Teacher Training Programme</span>
         </Link>
         <button
           className="menu-toggle"
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
+          aria-controls="primary-nav"
           onClick={() => setOpen((o) => !o)}
         >
           {open ? <X size={18} aria-hidden /> : <Menu size={18} aria-hidden />}
         </button>
-        <nav className={`nav${open ? ' open' : ''}`} aria-label="Primary">
+        <nav className={`nav${open ? ' open' : ''}`} id="primary-nav" aria-label="Primary">
           <ul>
             {ITEMS.map((it) => (
               <li key={it.to}>
-                <NavLink
-                  to={it.to}
-                  end={it.to === '/'}
-                  className={({ isActive }) => (isActive ? 'active' : undefined)}
-                  onClick={() => setOpen(false)}
-                >
+                <NavLink to={it.to} end={it.to === '/'} className={({ isActive }) => (isActive ? 'active' : undefined)}>
                   {it.label}
                 </NavLink>
               </li>

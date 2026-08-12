@@ -16,7 +16,7 @@ export default function Courses() {
     <section className="sec">
       <div className="wrap">
         <div className="sec__head">
-          <h2 className="sec-title">Courses</h2>
+          <h1 className="sec-title">Courses</h1>
           <p className="lede">
             Browse, search and filter. Every course is built from short video lessons, quizzes and practical
             assignments — and completing one is your ticket to a real project.
@@ -32,7 +32,7 @@ export default function Courses() {
         />
         <div className="filterbar" role="group" aria-label="Filter by category">
           {['All', ...CATEGORIES].map((c) => (
-            <button key={c} className={cat === c ? 'on' : undefined} onClick={() => setCat(c)}>
+            <button key={c} className={cat === c ? 'on' : undefined} aria-pressed={cat === c} onClick={() => setCat(c)}>
               {c}
             </button>
           ))}

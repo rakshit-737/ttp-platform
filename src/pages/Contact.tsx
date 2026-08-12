@@ -17,7 +17,7 @@ export default function Contact() {
     <section className="sec">
       <div className="wrap" style={{ maxWidth: 660 }}>
         <div className="sec__head">
-          <h2 className="sec-title">Contact TTP</h2>
+          <h1 className="sec-title">Contact TTP</h1>
           <p className="dataline">
             Phone 9109563282 · Email teachertrainingprogramme3@gmail.com · Location Bhopal, Madhya Pradesh, India
           </p>

@@ -5,7 +5,7 @@ export default function About() {
     <section className="sec">
       <div className="wrap" style={{ maxWidth: 800 }}>
         <div className="sec__head">
-          <h2 className="sec-title">TTP is not just a platform where users watch courses.</h2>
+          <h1 className="sec-title">TTP is not just a platform where users watch courses.</h1>
         </div>
         <p className="lede" style={{ marginBottom: 26 }}>
           TTP helps participants learn through structured courses and then apply that knowledge to real startup

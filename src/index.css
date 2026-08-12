@@ -51,7 +51,8 @@ img, svg { max-width: 100%; display: block; }
 a { color: var(--navy); text-decoration: none; }
 a:hover { text-decoration: underline; }
 button { font-family: inherit; cursor: pointer; }
-:focus-visible { outline: 3px solid var(--saffron); outline-offset: 2px; border-radius: 2px; }
+:focus-visible { outline: 3px solid var(--saffron); outline-offset: 2px; }
+a.no-underline:hover { text-decoration: none; }
 
 .wrap { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
 
@@ -64,7 +65,7 @@ button { font-family: inherit; cursor: pointer; }
   text-wrap: balance;
 }
 
-h2.sec-title {
+.sec-title {
   font-family: var(--font-display);
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -224,7 +225,7 @@ h2.sec-title {
 
 /* ---------- pillar cards (home) ---------- */
 .pillar { border-top: 2px solid var(--ink); padding-top: 16px; }
-.pillar h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.18rem; margin: 0 0 6px; }
+.pillar h2 { font-family: var(--font-display); font-weight: 700; font-size: 1.18rem; margin: 0 0 6px; }
 .pillar p { font-size: 0.92rem; color: var(--muted); }
 
 /* ---------- course card ---------- */
@@ -410,12 +411,15 @@ h2.sec-title {
   position: fixed; inset: 0; z-index: 100;
   background: rgba(16, 24, 32, 0.55);
   display: flex; align-items: center; justify-content: center; padding: 20px;
+  overscroll-behavior: contain;
 }
 .modal {
   background: var(--paper); border: 1.5px solid var(--ink);
   border-radius: 8px; max-width: 540px; width: 100%;
   max-height: 88vh; overflow-y: auto; padding: 30px; position: relative;
+  overscroll-behavior: contain;
 }
+.modal:focus { outline: none; }
 .modal__x {
   position: absolute; top: 12px; right: 14px;
   background: none; border: none; font-size: 1.35rem; color: var(--muted);
@@ -483,6 +487,7 @@ h2.sec-title {
   .grid--4 { grid-template-columns: repeat(2, 1fr); }
   .grid--3 { grid-template-columns: repeat(2, 1fr); }
   .split { grid-template-columns: 1fr; }
+  .split > aside { order: -1; } /* price/allocation panel first on small screens */
   .sticky { position: static; }
   .hero__grid { grid-template-columns: 1fr; gap: 60px; }
   .nav {
@@ -498,6 +503,8 @@ h2.sec-title {
 @media (max-width: 640px) {
   .grid--2, .grid--3, .grid--4 { grid-template-columns: 1fr; }
   .hdr__login { display: none; }
+  .brand__word { display: none; } /* mark only — full wordmark overflows a 360px header */
+  .hdr__in { gap: 12px; }
   .fieldlist { grid-template-columns: 1fr; }
   .fieldlist dt { padding-top: 10px; }
   body { font-size: 16px; }

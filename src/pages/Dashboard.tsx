@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Modal from '../components/Modal';
@@ -24,10 +24,23 @@ export default function Dashboard() {
   const [qaText, setQaText] = useState('');
 
   useEffect(() => {
-    if (!state.user) navigate('/login');
+    if (!state.user) navigate('/login', { replace: true });
   }, [state.user, navigate]);
 
+  const qaRef = useRef<HTMLDivElement>(null);
+  const qaCount = state.qa.length;
+  useEffect(() => {
+    const el = qaRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
+  }, [qaCount]);
+
   if (!state.user) return null;
+
+  const closeTask = () => {
+    setOpenTask(null);
+    setTaskText('');
+    setTaskFile('');
+  };
 
   const project = PROJECTS.find((p) => state.allocated.includes(p.id));
   const enrolledCourses = state.enrolled.map((id) => COURSES.find((c) => c.id === id)).filter(Boolean);
@@ -46,9 +59,7 @@ export default function Dashboard() {
     e.preventDefault();
     if (!openTask) return;
     submitTask(openTask.id, taskText + (taskFile ? ` [file: ${taskFile}]` : ''));
-    setOpenTask(null);
-    setTaskText('');
-    setTaskFile('');
+    closeTask();
     toast('Work submitted — your mentor reviews it and feedback appears on this task.');
   };
 
@@ -69,7 +80,7 @@ export default function Dashboard() {
       <div className="wrap">
         <div className="sec__head sec__head--row">
           <div>
-            <h2 className="sec-title">Hello, {state.user.name.split(' ')[0]}</h2>
+            <h1 className="sec-title">Hello, {state.user.name.split(' ')[0]}</h1>
             <p className="meta">Your participant dashboard — courses, project and mentor in one place.</p>
           </div>
           <button
@@ -214,7 +225,7 @@ export default function Dashboard() {
                 </button>
               </div>
               <span className="panel-label">Q&amp;A with your mentor</span>
-              <div className="qa">
+              <div className="qa" ref={qaRef}>
                 {state.qa.length > 0 ? (
                   state.qa.map((m, i) => (
                     <div className={`msg ${m.from === 'me' ? 'msg--me' : 'msg--them'}`} key={i}>
@@ -253,7 +264,7 @@ export default function Dashboard() {
         (() => {
           const rec = state.tasks[openTask.id];
           return (
-            <Modal onClose={() => setOpenTask(null)}>
+            <Modal onClose={closeTask}>
               <h3>{openTask.title}</h3>
               <p className="meta mono" style={{ marginBottom: 6 }}>
                 Milestone: {openTask.milestone} · Deadline: {openTask.due} · {openTask.points} pts

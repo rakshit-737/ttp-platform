@@ -18,7 +18,7 @@ export default function HowItWorks() {
     <section className="sec">
       <div className="wrap">
         <div className="sec__head">
-          <h2 className="sec-title">How It Works</h2>
+          <h1 className="sec-title">How It Works</h1>
           <p className="lede">Twelve steps from first login to certified real-project experience — in this exact order.</p>
         </div>
         <ol className="rail">
