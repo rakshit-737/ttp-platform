@@ -1,0 +1,82 @@
+import type { Project } from '../types';
+
+export const PROJECTS: Project[] = [
+  {
+    id: 'abc-edtech',
+    name: 'ABC EdTech',
+    industry: 'Education',
+    status: 'open',
+    problem: 'The startup struggles to acquire and convert customers.',
+    objective: 'Understand how a real startup works and how real business problems are solved.',
+    skills: ['Market research', 'Competitor research', 'Customer analysis', 'Marketing strategy', 'Sales strategy'],
+    duration: '6 weeks',
+    mentor: 'Rahul Sharma',
+    role: 'Marketing',
+    currentProblem: 'Converting visitors into customers',
+    tasks: [
+      {
+        id: 't1',
+        milestone: 'Competitor Research',
+        title: 'Competitor Research',
+        brief: 'Find five competitors and compare their pricing and marketing strategies.',
+        due: '15 August 2026',
+        points: 10,
+      },
+      {
+        id: 't2',
+        milestone: 'Customer Research',
+        title: 'Customer Research',
+        brief: 'Interview or survey ten potential customers and summarise what blocks them from buying.',
+        due: '22 August 2026',
+        points: 10,
+      },
+      {
+        id: 't3',
+        milestone: 'Marketing Plan',
+        title: 'Marketing Plan',
+        brief: 'Propose a 30-day marketing plan to improve visitor-to-customer conversion, with budget and channels.',
+        due: '29 August 2026',
+        points: 15,
+      },
+      {
+        id: 't4',
+        milestone: 'Final Report',
+        title: 'Final Report',
+        brief: 'Combine research and plan into one final recommendation deck for the founders.',
+        due: '5 September 2026',
+        points: 15,
+      },
+    ],
+  },
+  {
+    id: 'greenkart',
+    name: 'GreenKart',
+    industry: 'D2C Grocery',
+    status: 'soon',
+    problem: 'First-time buyers rarely order a second time.',
+    objective: 'Diagnose retention and design a repeat-purchase programme for an organic grocery startup.',
+    skills: ['Customer analysis', 'Retention strategy', 'Pricing', 'Communication'],
+    duration: '5 weeks',
+    mentor: 'Priya Nair',
+    role: 'Growth',
+    currentProblem: 'Second-order retention',
+    tasks: [],
+  },
+  {
+    id: 'skillsetu',
+    name: 'SkillSetu',
+    industry: 'Vocational Hiring',
+    status: 'soon',
+    problem: 'Employers post jobs but verified candidates onboard too slowly.',
+    objective: 'Map the candidate onboarding journey and remove the steps where applicants drop off.',
+    skills: ['Process mapping', 'User research', 'Operations', 'Reporting'],
+    duration: '4 weeks',
+    mentor: 'Amit Deshmukh',
+    role: 'Operations',
+    currentProblem: 'Candidate onboarding drop-off',
+    tasks: [],
+  },
+];
+
+/** Method A (free launch): password TTP shares with allocated participants. */
+export const ALLOCATION_PASSWORD = 'ttp-abc';

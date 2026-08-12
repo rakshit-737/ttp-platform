@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="TTP — Learn Business. Work on Real Projects. Think Like a Founder. Courses, real startup projects and mentorship in Bhopal, Madhya Pradesh.">
+</head>
+<body>
+<title>TTP — Teacher Training Programme</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#14264C; --navy-deep:#0E1B38; --navy-soft:#1E3563;
+    --paper:#FFFFFF; --mist:#F3F5FA; --tint:#E8EDF7;
+    --ink:#232936; --muted:#5D6675; --line:#DFE5F0;
+    --ok:#1E7A46; --warn:#8A5A00;
+    --radius:12px;
+    --shadow:0 6px 24px rgba(20,38,76,.08);
+    --font:'Inter',-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:auto}
+  body{font-family:var(--font);color:var(--ink);background:var(--paper);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  img,svg{max-width:100%;display:block}
+  a{color:var(--navy);text-decoration:none}
+  a:hover{text-decoration:underline}
+  button{font-family:inherit;cursor:pointer}
+  :focus-visible{outline:3px solid var(--navy);outline-offset:2px;border-radius:4px}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+
+  /* ---------- header ---------- */
+  .site-head{position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:1px solid var(--line)}
+  .head-in{display:flex;align-items:center;gap:18px;min-height:66px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.02em;font-size:1.05rem;color:var(--navy);white-space:nowrap}
+  .brand:hover{text-decoration:none}
+  .brand-mark{width:34px;height:34px;border-radius:9px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:800;letter-spacing:.02em}
+  nav.main{flex:1;display:flex;justify-content:center}
+  nav.main ul{display:flex;gap:4px;list-style:none;flex-wrap:wrap;justify-content:center}
+  nav.main a{display:block;padding:8px 11px;border-radius:8px;font-size:.92rem;font-weight:500;color:var(--ink)}
+  nav.main a:hover{background:var(--mist);text-decoration:none}
+  nav.main a.on{color:var(--navy);font-weight:700;background:var(--tint)}
+  .head-cta{display:flex;align-items:center;gap:14px;white-space:nowrap}
+  .login-link{font-size:.92rem;font-weight:600;color:var(--navy)}
+  .btn{display:inline-block;background:var(--navy);color:#fff;border:1px solid var(--navy);border-radius:9px;padding:10px 20px;font-size:.95rem;font-weight:700;text-align:center}
+  .btn:hover{background:var(--navy-deep);text-decoration:none}
+  .btn.sm{padding:7px 14px;font-size:.88rem}
+  .btn.ghost{background:transparent;color:var(--navy)}
+  .btn.ghost:hover{background:var(--tint)}
+  .btn.wide{width:100%}
+  .btn[disabled]{opacity:.5;cursor:not-allowed}
+  .menu-btn{display:none;background:none;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:1rem;color:var(--navy)}
+
+  /* ---------- shared ---------- */
+  .eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  h1.display{font-size:clamp(2rem,4.6vw,3.1rem);font-weight:800;letter-spacing:-.03em;line-height:1.12;color:var(--navy);text-wrap:balance}
+  h2.sec{font-size:clamp(1.4rem,2.6vw,1.75rem);font-weight:800;letter-spacing:-.02em;color:var(--navy);text-wrap:balance}
+  .sub{color:var(--muted);max-width:62ch}
+  section.block{padding:56px 0}
+  section.block.alt{background:var(--mist)}
+  .sec-head{display:flex;flex-direction:column;gap:8px;margin-bottom:28px}
+  .grid{display:grid;gap:18px}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+  .card h3{font-size:1.06rem;font-weight:700;color:var(--navy);margin-bottom:6px}
+  .card p{font-size:.94rem;color:var(--muted)}
+  .pill{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 10px;border-radius:999px;background:var(--tint);color:var(--navy)}
+  .pill.ok{background:#E4F3EA;color:var(--ok)}
+  .pill.warn{background:#F7EEDD;color:var(--warn)}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{font-size:.78rem;font-weight:600;background:var(--mist);border:1px solid var(--line);border-radius:999px;padding:3px 10px;color:var(--ink)}
+  .bar{height:8px;border-radius:999px;background:var(--tint);overflow:hidden}
+  .bar i{display:block;height:100%;background:var(--navy);border-radius:999px}
+  .meta{font-size:.85rem;color:var(--muted)}
+  .stars{color:var(--navy);letter-spacing:.05em;font-size:.85rem}
+  .note{background:var(--mist);border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:8px;padding:14px 16px;font-size:.92rem;color:var(--ink)}
+
+  /* ---------- hero ---------- */
+  .hero{padding:74px 0 62px;text-align:center;background:
+    radial-gradient(600px 220px at 15% 0%,var(--tint),transparent 70%),
+    radial-gradient(600px 220px at 85% 100%,var(--tint),transparent 70%),var(--paper)}
+  .hero .sub{margin:18px auto 30px}
+  .hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+  /* ---------- course card ---------- */
+  .ccard{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column}
+  .ccard:hover{border-color:var(--navy);box-shadow:var(--shadow)}
+  .cart{height:132px;background:var(--tint);display:flex;align-items:center;justify-content:center}
+  .cbody{padding:18px 18px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .cbody h3{font-size:1.02rem;font-weight:700;color:var(--navy);line-height:1.35}
+  .cbody .ex{font-size:.88rem;color:var(--muted);flex:1}
+  .crow{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:.85rem;color:var(--muted)}
+  .price{font-weight:800;color:var(--navy);font-size:1.05rem;font-variant-numeric:tabular-nums}
+
+  /* ---------- project dossier ---------- */
+  .dossier{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:24px;display:flex;flex-direction:column;gap:14px}
+  .dossier:hover{border-color:var(--navy);box-shadow:var(--shadow)}
+  .dossier header{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+  .dossier h3{font-size:1.2rem;font-weight:800;letter-spacing:-.01em;color:var(--navy)}
+  .dl{display:grid;grid-template-columns:110px 1fr;gap:6px 14px;font-size:.9rem}
+  .dl dt{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:2px}
+  .dl dd{color:var(--ink)}
+
+  /* ---------- journey ---------- */
+  .journey{background:var(--navy);color:#fff;padding:26px 0}
+  .journey .wrap{display:flex;flex-wrap:wrap;gap:8px 6px;align-items:center;justify-content:center;font-weight:600;font-size:.95rem}
+  .journey .step{padding:4px 8px}
+  .journey .arr{opacity:.5}
+  .rail{list-style:none;counter-reset:st;display:flex;flex-direction:column;gap:0;max-width:640px}
+  .rail li{counter-increment:st;position:relative;padding:0 0 26px 62px}
+  .rail li::before{content:counter(st,decimal-leading-zero);position:absolute;left:0;top:-2px;width:40px;height:40px;border-radius:12px;background:var(--tint);color:var(--navy);font-weight:800;font-size:.85rem;display:flex;align-items:center;justify-content:center}
+  .rail li::after{content:"";position:absolute;left:19px;top:42px;bottom:4px;width:2px;background:var(--line)}
+  .rail li:last-child{padding-bottom:0}
+  .rail li:last-child::after{display:none}
+  .rail b{color:var(--navy)}
+  .rail p{font-size:.9rem;color:var(--muted)}
+
+  /* ---------- detail / dashboard ---------- */
+  .split{display:grid;grid-template-columns:1fr 340px;gap:26px;align-items:start}
+  .sticky-box{position:sticky;top:86px}
+  .list{list-style:none;display:flex;flex-direction:column;gap:10px}
+  .row-item{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--paper)}
+  .row-item .t{font-size:.92rem;font-weight:600;color:var(--ink)}
+  .row-item .d{font-size:.8rem;color:var(--muted)}
+  .topic{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:12px;background:var(--paper)}
+  .topic > .th{background:var(--mist);padding:12px 16px;font-weight:700;color:var(--navy);font-size:.95rem;display:flex;justify-content:space-between;gap:10px}
+  .topic ul{list-style:none}
+  .topic li{display:flex;align-items:center;gap:10px;padding:10px 16px;border-top:1px solid var(--line);font-size:.9rem}
+  .ic{width:22px;height:22px;border-radius:6px;background:var(--tint);color:var(--navy);font-size:.62rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}
+  .avatar{width:52px;height:52px;border-radius:50%;background:var(--navy);color:#fff;font-weight:800;font-size:1.05rem;display:flex;align-items:center;justify-content:center;flex:none}
+  .m-card{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+  .stat{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px}
+  .stat .n{font-size:1.5rem;font-weight:800;color:var(--navy);font-variant-numeric:tabular-nums}
+  .stat .l{font-size:.8rem;color:var(--muted);font-weight:600}
+  .qa{display:flex;flex-direction:column;gap:10px;max-height:280px;overflow-y:auto;padding:4px 2px}
+  .msg{max-width:85%;padding:9px 13px;border-radius:12px;font-size:.88rem;line-height:1.5}
+  .msg.me{align-self:flex-end;background:var(--navy);color:#fff;border-bottom-right-radius:4px}
+  .msg.them{align-self:flex-start;background:var(--mist);border:1px solid var(--line);border-bottom-left-radius:4px}
+  .msg .who{display:block;font-size:.68rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;opacity:.7;margin-bottom:2px}
+
+  /* ---------- forms ---------- */
+  form.stack{display:flex;flex-direction:column;gap:14px}
+  label.f{display:flex;flex-direction:column;gap:6px;font-size:.85rem;font-weight:600;color:var(--ink)}
+  input.f,textarea.f,select.f{font-family:inherit;font-size:.95rem;padding:11px 13px;border:1px solid var(--line);border-radius:9px;background:var(--paper);color:var(--ink);width:100%}
+  input.f:focus,textarea.f:focus,select.f:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px var(--tint)}
+  .auth-card{max-width:420px;margin:0 auto;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow)}
+  .searchbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
+  .searchbar input{flex:1;min-width:220px}
+  .catbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
+  .catbar button{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 14px;font-size:.84rem;font-weight:600;color:var(--ink)}
+  .catbar button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+  /* ---------- modal ---------- */
+  .overlay{position:fixed;inset:0;background:rgba(14,27,56,.55);display:flex;align-items:center;justify-content:center;padding:20px;z-index:100}
+  .modal{background:var(--paper);border-radius:14px;max-width:520px;width:100%;max-height:88vh;overflow-y:auto;padding:28px;position:relative}
+  .modal .x{position:absolute;top:12px;right:14px;background:none;border:none;font-size:1.3rem;color:var(--muted);line-height:1;padding:6px}
+  .modal h3{color:var(--navy);font-weight:800;font-size:1.2rem;margin-bottom:12px;padding-right:28px}
+  .orow{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:.92rem}
+  .orow.total{font-weight:800;color:var(--navy);border-bottom:none;font-size:1rem}
+
+  /* ---------- certificate ---------- */
+  .cert{border:3px double var(--navy);border-radius:8px;padding:30px 26px;text-align:center;background:var(--mist);position:relative;overflow:hidden}
+  .cert .wm{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.6rem;font-weight:800;color:rgba(20,38,76,.06);transform:rotate(-18deg);pointer-events:none;letter-spacing:.2em}
+  .cert .cn{font-size:1.45rem;font-weight:800;color:var(--navy);margin:8px 0 2px}
+  .cert .sig{margin-top:18px;display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted)}
+  .cert .sig span{border-top:1px solid var(--muted);padding-top:4px;min-width:120px}
+
+  /* ---------- footer ---------- */
+  footer.site{background:var(--navy);color:#fff;padding:36px 0;margin-top:0}
+  footer.site .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-start}
+  footer.site h4{font-size:.95rem;font-weight:800;margin-bottom:4px}
+  footer.site p, footer.site a{font-size:.85rem;color:#C9D3E8}
+  footer.site a:hover{color:#fff}
+  footer.site ul{list-style:none;display:flex;flex-direction:column;gap:4px}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:12px 22px;border-radius:10px;font-size:.9rem;font-weight:600;z-index:200;box-shadow:var(--shadow)}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:960px){
+    .g4{grid-template-columns:repeat(2,1fr)}
+    .g3{grid-template-columns:repeat(2,1fr)}
+    .split{grid-template-columns:1fr}
+    .sticky-box{position:static}
+    nav.main{display:none;position:absolute;top:66px;left:0;right:0;background:var(--paper);border-bottom:1px solid var(--line);padding:10px 16px 16px}
+    nav.main.open{display:block}
+    nav.main ul{flex-direction:column;gap:2px}
+    .menu-btn{display:block;margin-left:auto}
+    .head-cta{margin-left:0}
+  }
+  @media (max-width:640px){
+    .g2,.g3,.g4{grid-template-columns:1fr}
+    .head-cta .login-link{display:none}
+    .dl{grid-template-columns:1fr}
+    .dl dt{padding-top:8px}
+    body{font-size:16px}
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .btn,.ccard,.dossier,.catbar button{transition:background .15s,border-color .15s,box-shadow .15s,color .15s}
+  }
+</style>
+
+<header class="site-head">
+  <div class="wrap head-in">
+    <a class="brand" href="#/home"><span class="brand-mark">TTP</span><span>Teacher Training Programme</span></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">☰</button>
+    <nav class="main" id="mainNav" aria-label="Primary">
+      <ul>
+        <li><a href="#/home" data-nav="home">Home</a></li>
+        <li><a href="#/courses" data-nav="courses">Courses</a></li>
+        <li><a href="#/projects" data-nav="projects">Real Projects</a></li>
+        <li><a href="#/how" data-nav="how">How It Works</a></li>
+        <li><a href="#/mentors" data-nav="mentors">Mentors</a></li>
+        <li><a href="#/about" data-nav="about">About</a></li>
+        <li><a href="#/contact" data-nav="contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="head-cta" id="headCta"></div>
+  </div>
+</header>
+
+<main id="view"></main>
+
+<footer class="site">
+  <div class="wrap">
+    <div>
+      <h4>TTP — Teacher Training Programme</h4>
+      <p>Learn Business. Work on Real Projects.<br>Think Like a Founder.</p>
+    </div>
+    <div>
+      <h4>Quick links</h4>
+      <ul>
+        <li><a href="#/courses">Courses</a></li>
+        <li><a href="#/projects">Real Projects</a></li>
+        <li><a href="#/contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p>9109563282<br>teachertrainingprogramme3@gmail.com<br>Bhopal, Madhya Pradesh</p>
+    </div>
+  </div>
+</footer>
+
+<div id="modalRoot"></div>
+
+<script>
+'use strict';
+/* ================= DATA ================= */
+const CATS = ['Business & Entrepreneurship','Marketing & Sales','Finance','Operations & Management','Technology & AI'];
+
+const COURSES = [
+  {id:'startup-fundamentals', title:'Startup Fundamentals', cat:CATS[0], price:999, hours:6, rating:4.8, lessons:12, level:'Beginner',
+   ex:'Learn how startups work, grow and solve problems.',
+   learn:['How startups create, deliver and capture value','Finding and validating a real problem worth solving','Business models, revenue and unit basics','How founders make decisions with limited resources'],
+   reqs:['No prior business knowledge needed','A notebook and curiosity about how companies work'],
+   curriculum:[
+     {t:'Module 1 — What Is a Startup?', items:[['L','What makes a startup different from a business'],['Q','Quiz: Startup basics']]},
+     {t:'Module 2 — Problems Worth Solving', items:[['L','Finding real problems and real customers'],['Q','Quiz: Problem validation'],['A','Assignment: Interview two potential customers']]},
+     {t:'Module 3 — Business Models', items:[['L','How startups earn: models and revenue'],['Q','Quiz: Business models']]},
+     {t:'Module 4 — Growth and Survival', items:[['L','Growth, funding and staying alive'],['Q','Quiz: Growth basics'],['A','Assignment: One-page startup teardown']]}]},
+  {id:'digital-marketing', title:'Digital Marketing', cat:CATS[1], price:1299, hours:8, rating:4.8, lessons:16, level:'Beginner',
+   ex:'Reach, convert and keep customers using digital channels.',
+   learn:['Building a simple digital marketing plan','Social, search and content channels — when to use which','Measuring what works with basic analytics','Turning attention into paying customers'],
+   reqs:['A smartphone or laptop with internet access'],
+   curriculum:[
+     {t:'Module 1 — Marketing Foundations', items:[['L','How digital marketing actually works'],['Q','Quiz: Channels and funnels']]},
+     {t:'Module 2 — Content & Social', items:[['L','Content that earns attention'],['A','Assignment: Draft a one-week content plan']]},
+     {t:'Module 3 — Paid & Search', items:[['L','Search and paid basics for small budgets'],['Q','Quiz: Search and ads']]},
+     {t:'Module 4 — Measure & Improve', items:[['L','Reading the numbers that matter'],['A','Assignment: Audit one real brand’s funnel']]}]},
+  {id:'startup-finance', title:'Startup Finance', cat:CATS[2], price:899, hours:5, rating:4.8, lessons:10, level:'Beginner',
+   ex:'Understand money in a startup — costs, cash and pricing.',
+   learn:['Reading simple financial statements','Costs, margins and pricing decisions','Cash flow and why startups die without it','Budgeting for a small team'],
+   reqs:['Basic arithmetic — nothing more'],
+   curriculum:[
+     {t:'Module 1 — Money In, Money Out', items:[['L','Revenue, costs and margin'],['Q','Quiz: Finance basics']]},
+     {t:'Module 2 — Cash Flow', items:[['L','Cash flow and runway'],['Q','Quiz: Cash flow'],['A','Assignment: Build a simple monthly budget']]},
+     {t:'Module 3 — Pricing', items:[['L','Pricing a product with confidence'],['Q','Quiz: Pricing']]}]},
+  {id:'business-model-development', title:'Business Model Development', cat:CATS[0], price:1199, hours:7, rating:4.7, lessons:14, level:'Intermediate',
+   ex:'Design and test a business model that can actually work.',
+   learn:['Mapping a business model end to end','Testing risky assumptions cheaply','Choosing revenue streams and pricing logic'],
+   reqs:['Startup Fundamentals recommended first'],
+   curriculum:[
+     {t:'Module 1 — The Model Map', items:[['L','Mapping customers, value and channels'],['Q','Quiz: Model mapping']]},
+     {t:'Module 2 — Testing Assumptions', items:[['L','Cheap experiments before big bets'],['A','Assignment: Test one assumption this week']]}]},
+  {id:'market-research', title:'Market Research', cat:CATS[0], price:799, hours:4, rating:4.6, lessons:8, level:'Beginner',
+   ex:'Find out what customers really want before building.',
+   learn:['Desk research that saves weeks','Customer interviews that reveal truth','Sizing a market realistically'],
+   reqs:['No prerequisites'],
+   curriculum:[
+     {t:'Module 1 — Research Basics', items:[['L','What to research and why'],['Q','Quiz: Research methods']]},
+     {t:'Module 2 — Talking to Customers', items:[['L','Interviews without leading questions'],['A','Assignment: Run one customer interview']]}]},
+  {id:'sales-customer-acquisition', title:'Sales & Customer Acquisition', cat:CATS[1], price:1099, hours:6, rating:4.7, lessons:12, level:'Intermediate',
+   ex:'Turn interest into revenue with a repeatable sales motion.',
+   learn:['A simple sales process from lead to close','Handling objections honestly','Building an acquisition funnel that repeats'],
+   reqs:['Digital Marketing recommended first'],
+   curriculum:[
+     {t:'Module 1 — The Sales Process', items:[['L','From first contact to closed deal'],['Q','Quiz: Sales stages']]},
+     {t:'Module 2 — Acquisition Funnels', items:[['L','Funnels that keep filling themselves'],['A','Assignment: Sketch your funnel']]}]},
+  {id:'team-management', title:'Team Management', cat:CATS[3], price:949, hours:5, rating:4.6, lessons:10, level:'Beginner',
+   ex:'Lead a small team well — roles, feedback and delivery.',
+   learn:['Setting roles and clear expectations','Giving feedback people can use','Running a week that ships work'],
+   reqs:['No prerequisites'],
+   curriculum:[
+     {t:'Module 1 — Roles & Clarity', items:[['L','Who does what, and why it matters'],['Q','Quiz: Team roles']]},
+     {t:'Module 2 — Feedback & Delivery', items:[['L','Feedback and weekly rhythm'],['A','Assignment: Write a one-week team plan']]}]},
+  {id:'ai-for-business', title:'AI for Business', cat:CATS[4], price:1499, hours:9, rating:4.9, lessons:18, level:'Intermediate',
+   ex:'Use AI tools to work faster across a real business.',
+   learn:['Where AI genuinely helps a small business','Practical AI tools for marketing, ops and research','Automating repetitive work safely'],
+   reqs:['Comfort with everyday software'],
+   curriculum:[
+     {t:'Module 1 — AI, Practically', items:[['L','What AI can and cannot do for you'],['Q','Quiz: AI fundamentals']]},
+     {t:'Module 2 — AI in the Workflow', items:[['L','AI tools across marketing and operations'],['A','Assignment: Automate one task with AI']]}]},
+  {id:'cash-flow-management', title:'Cash Flow Management', cat:CATS[2], price:849, hours:4, rating:4.5, lessons:8, level:'Beginner',
+   ex:'Keep money moving — runway, collections and control.',
+   learn:['Building a rolling cash view','Collecting on time without friction','Spotting trouble weeks early'],
+   reqs:['Startup Finance recommended first'],
+   curriculum:[
+     {t:'Module 1 — The Cash View', items:[['L','A rolling 12-week cash picture'],['Q','Quiz: Cash view']]},
+     {t:'Module 2 — Control', items:[['L','Collections, payables and discipline'],['A','Assignment: Draft a 4-week cash plan']]}]}
+];
+
+const REVIEWS = [
+  {name:'Ankit S.', stars:5, text:'Clear, practical and straight to the point. The assignment made me actually talk to customers.'},
+  {name:'Pooja M.', stars:5, text:'Best part is what comes after — I was allocated to a real project and used everything from this course.'},
+  {name:'Ravi K.', stars:4, text:'Good pace for beginners. Quizzes keep you honest.'}
+];
+
+const PROJECTS = [
+  {id:'abc-edtech', name:'ABC EdTech', industry:'Education', status:'Open for allocation',
+   problem:'The startup struggles to acquire and convert customers.',
+   objective:'Understand how a real startup works and how real business problems are solved.',
+   skills:['Market research','Competitor research','Customer analysis','Marketing strategy','Sales strategy'],
+   duration:'6 weeks', mentor:'Rahul Sharma', role:'Marketing',
+   currentProblem:'Converting visitors into customers',
+   tasks:[
+     {id:'t1', ms:'Competitor Research', title:'Competitor Research', brief:'Find five competitors and compare their pricing and marketing strategies.', due:'15 August 2026', points:10},
+     {id:'t2', ms:'Customer Research', title:'Customer Research', brief:'Interview or survey ten potential customers and summarise what blocks them from buying.', due:'22 August 2026', points:10},
+     {id:'t3', ms:'Marketing Plan', title:'Marketing Plan', brief:'Propose a 30-day marketing plan to improve visitor-to-customer conversion, with budget and channels.', due:'29 August 2026', points:15},
+     {id:'t4', ms:'Final Report', title:'Final Report', brief:'Combine research and plan into one final recommendation deck for the founders.', due:'5 September 2026', points:15}]},
+  {id:'greenkart', name:'GreenKart', industry:'D2C Grocery', status:'Allocating soon',
+   problem:'First-time buyers rarely order a second time.',
+   objective:'Diagnose retention and design a repeat-purchase programme for an organic grocery startup.',
+   skills:['Customer analysis','Retention strategy','Pricing','Communication'],
+   duration:'5 weeks', mentor:'Priya Nair', role:'Growth', currentProblem:'Second-order retention', tasks:[]},
+  {id:'skillsetu', name:'SkillSetu', industry:'Vocational Hiring', status:'Allocating soon',
+   problem:'Employers post jobs but verified candidates onboard too slowly.',
+   objective:'Map the candidate onboarding journey and remove the steps where applicants drop off.',
+   skills:['Process mapping','User research','Operations','Reporting'],
+   duration:'4 weeks', mentor:'Amit Deshmukh', role:'Operations', currentProblem:'Candidate onboarding drop-off', tasks:[]}
+];
+
+const MENTORS = [
+  {name:'Rahul Sharma', title:'Startup & Business Mentor', bio:'Guides participants through startup fundamentals and leads the ABC EdTech project. Reviews every submission personally.', focus:'Business & Entrepreneurship'},
+  {name:'Priya Nair', title:'Marketing & Growth Mentor', bio:'Ten years across brand and performance marketing. Mentors the marketing and sales tracks and the GreenKart project.', focus:'Marketing & Sales'},
+  {name:'Amit Deshmukh', title:'Finance & Operations Mentor', bio:'Former startup CFO. Teaches founders to read their own numbers and mentors the SkillSetu project.', focus:'Finance · Operations'},
+  {name:'Sneha Kulkarni', title:'Technology & AI Mentor', bio:'Product builder helping non-technical founders use AI tools well and ship faster.', focus:'Technology & AI'}
+];
+
+/* ================= STATE ================= */
+const BLANK = {user:null, enrolled:[], progress:{}, allocated:[], projProgress:{}, tasks:{}, qa:[], entries:[]};
+let S;
+try { S = Object.assign({}, BLANK, JSON.parse(localStorage.getItem('ttp-state')||'{}')); }
+catch(e){ S = Object.assign({}, BLANK); }
+function save(){ try{ localStorage.setItem('ttp-state', JSON.stringify(S)); }catch(e){} }
+
+function seedDemo(){
+  S.user = {name:'Demo Participant', email:'demo@ttp.in'};
+  S.enrolled = ['startup-fundamentals','digital-marketing'];
+  S.progress = {'startup-fundamentals':100, 'digital-marketing':60};
+  S.allocated = ['abc-edtech'];
+  S.projProgress = {'abc-edtech':45};
+  S.tasks = {t1:{status:'approved', submission:'Compared BYJU’S, Unacademy, Vedantu, Physics Wallah and Toppr on pricing tiers and channel mix. Sheet attached.', feedback:'Good coverage of all five competitors. Sharpen the pricing comparison into one table and add each brand’s main acquisition channel.', marks:'8 / 10'},
+            t2:{status:'submitted', submission:'Surveyed 12 parents; main blocker is unclear pricing on the website. Summary attached.'}};
+  S.qa = [
+    {from:'me', text:'Sir, for the marketing plan should I focus on paid ads or organic first?'},
+    {from:'mentor', text:'Start organic — the site’s conversion problem must be fixed before paying for traffic. Bring your funnel sketch to Friday’s session.'}
+  ];
+  save();
+}
+
+/* ================= HELPERS ================= */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const inr = n => '₹ ' + n.toLocaleString('en-IN');
+const initials = n => n.split(' ').map(w=>w[0]).slice(0,2).join('');
+function stars(r){ const f = Math.round(r); return '★'.repeat(f) + '☆'.repeat(5-f); }
+function toast(t){
+  const el = document.createElement('div'); el.className='toast'; el.textContent=t;
+  document.body.appendChild(el); setTimeout(()=>el.remove(), 2600);
+}
+function catArt(cat){
+  const i = Math.max(0, CATS.indexOf(cat));
+  const motifs = [
+    '<path d="M20 80 L45 45 L65 60 L95 25" stroke="#14264C" stroke-width="3" fill="none"/><circle cx="95" cy="25" r="5" fill="#14264C"/>',
+    '<circle cx="35" cy="55" r="18" stroke="#14264C" stroke-width="3" fill="none"/><circle cx="70" cy="45" r="12" stroke="#14264C" stroke-width="3" fill="none"/><circle cx="92" cy="65" r="7" fill="#14264C"/>',
+    '<rect x="22" y="55" width="14" height="30" fill="#14264C"/><rect x="46" y="40" width="14" height="45" fill="#5D74A8"/><rect x="70" y="25" width="14" height="60" fill="#14264C"/>',
+    '<rect x="22" y="30" width="26" height="26" rx="6" stroke="#14264C" stroke-width="3" fill="none"/><rect x="60" y="30" width="26" height="26" rx="6" stroke="#14264C" stroke-width="3" fill="none"/><rect x="41" y="58" width="26" height="26" rx="6" fill="#14264C"/>',
+    '<circle cx="35" cy="45" r="6" fill="#14264C"/><circle cx="75" cy="35" r="6" fill="#14264C"/><circle cx="60" cy="70" r="6" fill="#14264C"/><path d="M35 45 L75 35 L60 70 Z" stroke="#14264C" stroke-width="2.5" fill="none"/>'
+  ];
+  return '<svg viewBox="0 0 116 110" width="116" height="110" role="img" aria-label="'+esc(cat)+'">'+motifs[i]+'</svg>';
+}
+function courseCard(c){
+  return `<article class="ccard">
+    <div class="cart">${catArt(c.cat)}</div>
+    <div class="cbody">
+      <span class="eyebrow">${esc(c.cat)}</span>
+      <h3>${esc(c.title)}</h3>
+      <p class="ex">${esc(c.ex)}</p>
+      <div class="crow"><span class="stars" aria-label="Rated ${c.rating} out of 5">${stars(c.rating)} ${c.rating}</span><span>${c.hours} hours · ${c.level}</span></div>
+      <div class="crow"><span class="price">${inr(c.price)}</span><a class="btn sm ghost" href="#/course/${c.id}">View Course</a></div>
+    </div>
+  </article>`;
+}
+function projCard(p){
+  const open = p.tasks.length>0;
+  return `<article class="dossier">
+    <header>
+      <div><span class="eyebrow">Live startup project · ${esc(p.industry)}</span><h3>${esc(p.name)}</h3></div>
+      <span class="pill ${open?'ok':''}">${esc(p.status)}</span>
+    </header>
+    <dl class="dl">
+      <dt>Problem</dt><dd>${esc(p.problem)}</dd>
+      <dt>Objective</dt><dd>${esc(p.objective)}</dd>
+      <dt>Duration</dt><dd>${esc(p.duration)} · Mentor: ${esc(p.mentor)}</dd>
+    </dl>
+    <div class="chips">${p.skills.map(s=>`<span class="chip">${esc(s)}</span>`).join('')}</div>
+    <div><a class="btn sm" href="#/project/${p.id}">View Project</a></div>
+  </article>`;
+}
+
+/* ================= PAGES ================= */
+function pageHome(){
+  const featured = COURSES.slice(0,3).map(courseCard).join('');
+  return `
+  <section class="hero"><div class="wrap">
+    <span class="eyebrow">Teacher Training Programme · Bhopal, Madhya Pradesh</span>
+    <h1 class="display">Learn Business. Work on Real Projects.<br>Think Like a Founder.</h1>
+    <p class="sub">Learn through professional courses and gain practical experience by working on real startup projects under expert guidance.</p>
+    <div class="hero-cta">
+      <a class="btn" href="#/courses">Explore Courses</a>
+      <a class="btn ghost" href="#/projects">Explore Real Projects</a>
+    </div>
+  </div></section>
+
+  <section class="block"><div class="wrap">
+    <div class="grid g4">
+      <div class="card"><h3>Courses</h3><p>Learn important business and startup skills through structured courses.</p></div>
+      <div class="card"><h3>Real Projects</h3><p>Apply your learning by working on real startup projects.</p></div>
+      <div class="card"><h3>Real Problems</h3><p>Understand the challenges startups are facing today.</p></div>
+      <div class="card"><h3>Mentorship</h3><p>Receive guidance and feedback from experienced mentors.</p></div>
+    </div>
+  </div></section>
+
+  <section class="block alt"><div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Start learning</span><h2 class="sec">Popular Courses</h2></div>
+    <div class="grid g3">${featured}</div>
+  </div></section>
+
+  <div class="journey" role="presentation"><div class="wrap">
+    <span class="step">Learn</span><span class="arr">›</span>
+    <span class="step">Apply</span><span class="arr">›</span>
+    <span class="step">Work on Real Projects</span><span class="arr">›</span>
+    <span class="step">Get Guidance</span><span class="arr">›</span>
+    <span class="step">Gain Experience</span>
+  </div></div>`;
+}
+
+let courseFilter = {q:'', cat:'All'};
+function pageCourses(){
+  const list = COURSES.filter(c =>
+    (courseFilter.cat==='All' || c.cat===courseFilter.cat) &&
+    (courseFilter.q==='' || (c.title+' '+c.ex+' '+c.cat).toLowerCase().includes(courseFilter.q.toLowerCase()))
+  );
+  return `
+  <section class="block"><div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Course catalogue</span><h2 class="sec">Courses</h2>
+      <p class="sub">Browse, search and filter. Every course is built from short video lessons, quizzes and practical assignments.</p></div>
+    <div class="searchbar">
+      <input class="f" type="search" id="cq" placeholder="Search courses…" value="${esc(courseFilter.q)}" aria-label="Search courses">
+    </div>
+    <div class="catbar" role="tablist" aria-label="Filter by category">
+      ${['All',...CATS].map(c=>`<button data-cat="${esc(c)}" class="${courseFilter.cat===c?'on':''}">${esc(c)}</button>`).join('')}
+    </div>
+    <div class="grid g3">${list.length ? list.map(courseCard).join('') : '<p class="sub">No courses match that search yet. Clear the search to see the full catalogue.</p>'}</div>
+  </div></section>`;
+}
+
+function pageCourse(id){
+  const c = COURSES.find(x=>x.id===id);
+  if(!c) return notFound();
+  const enrolled = S.enrolled.includes(id);
+  const prog = S.progress[id]||0;
+  const mentor = MENTORS.find(m=>m.focus.includes(c.cat.split(' ')[0])) || MENTORS[0];
+  return `
+  <section class="block"><div class="wrap">
+    <div class="split">
+      <div>
+        <span class="eyebrow">${esc(c.cat)} · ${esc(c.level)}</span>
+        <h1 class="display" style="font-size:clamp(1.7rem,3.5vw,2.4rem)">${esc(c.title)}</h1>
+        <p class="sub" style="margin:12px 0 8px">${esc(c.ex)}</p>
+        <p class="meta"><span class="stars">${stars(c.rating)}</span> ${c.rating} · ${c.lessons} lessons · ${c.hours} hours · Instructor: ${esc(mentor.name)}</p>
+
+        <h2 class="sec" style="margin:34px 0 14px;font-size:1.25rem">What Will I Learn</h2>
+        <ul class="list">${c.learn.map(l=>`<li class="row-item"><span class="t">${esc(l)}</span></li>`).join('')}</ul>
+
+        <h2 class="sec" style="margin:34px 0 14px;font-size:1.25rem">Curriculum</h2>
+        ${c.curriculum.map(t=>`
+          <div class="topic">
+            <div class="th"><span>${esc(t.t)}</span><span class="meta">${t.items.length} items</span></div>
+            <ul>${t.items.map(([k,n])=>`<li><span class="ic">${k}</span>${esc(n)}${k==='L'?' <span class="meta">· video</span>':''}</li>`).join('')}</ul>
+          </div>`).join('')}
+
+        <h2 class="sec" style="margin:34px 0 14px;font-size:1.25rem">Requirements</h2>
+        <ul class="list">${c.reqs.map(r=>`<li class="row-item"><span class="t">${esc(r)}</span></li>`).join('')}</ul>
+
+        <h2 class="sec" style="margin:34px 0 14px;font-size:1.25rem">Reviews</h2>
+        <div class="grid" style="gap:12px">
+          ${REVIEWS.map(r=>`<div class="card"><p style="color:var(--ink);font-size:.92rem">“${esc(r.text)}”</p><p class="meta" style="margin-top:8px"><span class="stars">${stars(r.stars)}</span> — ${esc(r.name)}</p></div>`).join('')}
+        </div>
+      </div>
+
+      <aside class="sticky-box">
+        <div class="card" style="display:flex;flex-direction:column;gap:14px">
+          <div class="cart" style="border-radius:8px">${catArt(c.cat)}</div>
+          <div class="price" style="font-size:1.6rem">${inr(c.price)}</div>
+          <ul class="list" style="gap:6px">
+            <li class="meta">✓ ${c.lessons} video lessons</li>
+            <li class="meta">✓ Quizzes in every module</li>
+            <li class="meta">✓ Practical assignments with mentor feedback</li>
+            <li class="meta">✓ Counts toward real-project allocation</li>
+          </ul>
+          ${enrolled
+            ? `<div class="bar" aria-label="Progress ${prog}%"><i style="width:${prog}%"></i></div>
+               <p class="meta">${prog}% complete</p>
+               <a class="btn wide" href="#/dashboard">Continue in Dashboard</a>`
+            : `<button class="btn wide" data-buy="${c.id}">Buy Now — ${inr(c.price)}</button>
+               <p class="meta" style="text-align:center">Secure checkout · Razorpay (demo)</p>`}
+        </div>
+      </aside>
+    </div>
+  </div></section>`;
+}
+
+function pageProjects(){
+  return `
+  <section class="block"><div class="wrap">
+    <div class="sec-head"><span class="eyebrow">The TTP difference</span><h2 class="sec">Work on real startup problems.</h2>
+      <p class="sub">TTP's biggest difference from a normal course platform: after learning, you are assigned to a real startup project, work on real business problems in a team, and receive mentor feedback on real work.</p></div>
+    <div class="note" style="margin-bottom:30px">
+      <b>How allocation works:</b> complete your course → TTP assigns you to a suitable project → you join its team (e.g., ABC EdTech — Marketing) → you complete tasks with deadlines → you submit work and receive feedback.
+    </div>
+    <div class="grid g2" style="align-items:stretch">${PROJECTS.map(projCard).join('')}</div>
+  </div></section>`;
+}
+
+function pageProject(id){
+  const p = PROJECTS.find(x=>x.id===id);
+  if(!p) return notFound();
+  const allocated = S.allocated.includes(id);
+  const open = p.tasks.length>0;
+  return `
+  <section class="block"><div class="wrap">
+    <div class="split">
+      <div>
+        <span class="eyebrow">Live startup project · ${esc(p.industry)}</span>
+        <h1 class="display" style="font-size:clamp(1.7rem,3.5vw,2.4rem)">${esc(p.name)}</h1>
+        <dl class="dl" style="margin-top:18px">
+          <dt>Industry</dt><dd>${esc(p.industry)}</dd>
+          <dt>Problem</dt><dd>${esc(p.problem)}</dd>
+          <dt>Objective</dt><dd>${esc(p.objective)}</dd>
+          <dt>Skills</dt><dd>${p.skills.join(' · ')}</dd>
+          <dt>Duration</dt><dd>${esc(p.duration)}</dd>
+          <dt>Mentor</dt><dd>${esc(p.mentor)}</dd>
+        </dl>
+        ${open ? `
+        <h2 class="sec" style="margin:34px 0 14px;font-size:1.25rem">Milestones & tasks</h2>
+        ${p.tasks.map(t=>`
+          <div class="topic">
+            <div class="th"><span>${esc(t.ms)}</span><span class="meta">Deadline: ${esc(t.due)}</span></div>
+            <ul><li><span class="ic">A</span>${esc(t.brief)} <span class="meta">· ${t.points} points</span></li></ul>
+          </div>`).join('')}` : `
+        <div class="note" style="margin-top:30px">Milestones and tasks are revealed to allocated participants when this project opens.</div>`}
+      </div>
+      <aside class="sticky-box">
+        <div class="card" style="display:flex;flex-direction:column;gap:14px">
+          <span class="pill ${open?'ok':''}">${esc(p.status)}</span>
+          <p class="meta">Projects are free. Access is by TTP allocation after you complete the relevant course — never by purchase or self-enrolment.</p>
+          ${allocated
+            ? `<a class="btn wide" href="#/dashboard">Open in My Project</a>`
+            : open
+              ? `<label class="f">Allocation password<input class="f" id="allocPw" type="password" placeholder="Shared by TTP with your link" autocomplete="off"></label>
+                 <button class="btn wide" data-alloc="${p.id}">Enrol with allocation password</button>
+                 <p class="meta">Demo preview: the password is <b>ttp-abc</b>. In production, TTP shares the password-protected link only with chosen participants (or enrols them directly with Tutor LMS Pro).</p>`
+              : `<button class="btn wide" disabled>Allocation not yet open</button>`}
+        </div>
+      </aside>
+    </div>
+  </div></section>`;
+}
+
+function pageHow(){
+  const steps = [
+    ['Register','Create your TTP account with Get Started.'],
+    ['View courses','Browse the catalogue and pick your track.'],
+    ['Buy a course','Pay securely in ₹ through Razorpay.'],
+    ['Learn','Short video lessons at your own pace.'],
+    ['Complete modules','Each module: video → quiz/assignment.'],
+    ['Get TTP guidance','Q&A with your mentor inside every course.'],
+    ['Real project assigned','TTP allocates you to a suitable startup project.'],
+    ['Work on the real problem','Join the project team and take ownership.'],
+    ['Submit work','Upload your work against each task deadline.'],
+    ['Get feedback','Your mentor reviews, grades and guides revisions.'],
+    ['Complete the project','Finish every milestone with mentor approval.'],
+    ['Receive your certificate','Verified certificate with a unique ID.']
+  ];
+  return `
+  <section class="block"><div class="wrap">
+    <div class="sec-head"><span class="eyebrow">The full journey</span><h2 class="sec">How It Works</h2>
+      <p class="sub">Twelve steps from first login to certified real-project experience — in this exact order.</p></div>
+    <ol class="rail">${steps.map(([b,d])=>`<li><b>${esc(b)}</b><p>${esc(d)}</p></li>`).join('')}</ol>
+  </div></section>`;
+}
+
+function pageMentors(){
+  return `
+  <section class="block"><div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Guidance</span><h2 class="sec">Learn under experienced mentors.</h2>
+      <p class="sub">Every TTP participant has an assigned mentor who reviews assignments, gives feedback on project work, and conducts guidance sessions.</p></div>
+    <div class="grid g2">
+      ${MENTORS.map(m=>`<div class="card m-card">
+        <div style="display:flex;gap:14px;align-items:center">
+          <span class="avatar">${initials(m.name)}</span>
+          <div><h3 style="margin:0">${esc(m.name)}</h3><p class="meta" style="margin:0">${esc(m.title)}</p></div>
+        </div>
+        <p>${esc(m.bio)}</p>
+        <div class="chips"><span class="chip">${esc(m.focus)}</span><span class="chip">Q&A in every course</span><span class="chip">Weekly Google Meet</span></div>
+      </div>`).join('')}
+    </div>
+  </div></section>`;
+}
+
+function pageAbout(){
+  return `
+  <section class="block"><div class="wrap" style="max-width:760px">
+    <div class="sec-head"><span class="eyebrow">About</span><h2 class="sec">TTP is not just a platform where users watch courses.</h2></div>
+    <p style="margin-bottom:18px">TTP helps participants learn through structured courses and then apply that knowledge to real startup projects, understand real business problems, receive mentorship, and gain practical experience.</p>
+    <div class="journey" style="border-radius:12px"><div class="wrap" style="padding:0 10px">
+      <span class="step">Learn</span><span class="arr">›</span><span class="step">Apply</span><span class="arr">›</span><span class="step">Work on Real Problems</span><span class="arr">›</span><span class="step">Get Guidance</span><span class="arr">›</span><span class="step">Build Experience</span>
+    </div></div>
+    <p class="meta" style="margin-top:18px">TTP — Teacher Training Programme · Bhopal, Madhya Pradesh, India</p>
+  </div></section>`;
+}
+
+function pageContact(){
+  return `
+  <section class="block"><div class="wrap" style="max-width:640px">
+    <div class="sec-head"><span class="eyebrow">Contact</span><h2 class="sec">Contact TTP</h2>
+      <p class="sub">Phone 9109563282 · Email teachertrainingprogramme3@gmail.com · Location Bhopal, Madhya Pradesh, India</p></div>
+    <form class="stack card" id="contactForm">
+      <label class="f">Name<input class="f" name="name" required autocomplete="name"></label>
+      <label class="f">Email<input class="f" type="email" name="email" required autocomplete="email"></label>
+      <label class="f">Phone<input class="f" type="tel" name="phone" required autocomplete="tel"></label>
+      <label class="f">Message<textarea class="f" name="message" rows="4" required></textarea></label>
+      <button class="btn" type="submit">Submit</button>
+      <p class="meta">Messages go to teachertrainingprogramme3@gmail.com. (Preview build: your message is saved in this browser only.)</p>
+    </form>
+  </div></section>`;
+}
+
+function pageAuth(mode){
+  const isReg = mode==='register';
+  return `
+  <section class="block alt" style="min-height:60vh"><div class="wrap">
+    <div class="auth-card">
+      <h2 class="sec" style="margin-bottom:6px">${isReg?'Get Started':'Login'}</h2>
+      <p class="meta" style="margin-bottom:18px">${isReg?'Create your TTP participant account.':'Welcome back to TTP.'}</p>
+      <form class="stack" id="authForm" data-mode="${mode}">
+        ${isReg?'<label class="f">Full name<input class="f" name="name" required autocomplete="name"></label>':''}
+        <label class="f">Email<input class="f" type="email" name="email" required autocomplete="email"></label>
+        <label class="f">Password<input class="f" type="password" name="pw" required minlength="4" autocomplete="${isReg?'new-password':'current-password'}"></label>
+        <button class="btn wide" type="submit">${isReg?'Create account':'Login'}</button>
+      </form>
+      <p class="meta" style="margin:14px 0 8px;text-align:center">${isReg?'Already have an account? <a href="#/login">Login</a>':'New to TTP? <a href="#/register">Get Started</a>'}</p>
+      <hr style="border:none;border-top:1px solid var(--line);margin:14px 0">
+      <button class="btn ghost wide" id="demoBtn">Preview as demo participant</button>
+      <p class="meta" style="margin-top:8px;text-align:center">Loads a sample account with a course in progress and a live project allocation.</p>
+    </div>
+  </div></section>`;
+}
+
+function taskState(t){
+  const st = S.tasks[t.id];
+  if(!st) return {label:'Pending', cls:'warn'};
+  if(st.status==='approved') return {label:'Reviewed · '+(st.marks||''), cls:'ok'};
+  if(st.status==='submitted') return {label:'Submitted', cls:''};
+  return {label:'Pending', cls:'warn'};
+}
+
+function pageDashboard(){
+  if(!S.user) { location.hash = '#/login'; return ''; }
+  const proj = PROJECTS.find(p=>S.allocated.includes(p.id));
+  const pending = proj ? proj.tasks.filter(t=>!S.tasks[t.id]).length : 0;
+  const enrolledCourses = S.enrolled.map(id=>COURSES.find(c=>c.id===id)).filter(Boolean);
+  const completed = enrolledCourses.filter(c=>(S.progress[c.id]||0)>=100);
+  return `
+  <section class="block"><div class="wrap">
+    <div class="sec-head" style="flex-direction:row;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:14px">
+      <div><span class="eyebrow">Participant dashboard</span>
+      <h2 class="sec">Hello, ${esc(S.user.name.split(' ')[0])}</h2></div>
+      <button class="btn sm ghost" id="logoutBtn">Log out</button>
+    </div>
+
+    <div class="grid g4" style="margin-bottom:34px">
+      <div class="stat"><div class="n">${enrolledCourses.length}</div><div class="l">Enrolled courses</div></div>
+      <div class="stat"><div class="n">${completed.length}</div><div class="l">Courses completed</div></div>
+      <div class="stat"><div class="n">${proj?1:0}</div><div class="l">Active project</div></div>
+      <div class="stat"><div class="n">${pending}</div><div class="l">Tasks pending</div></div>
+    </div>
+
+    <h2 class="sec" style="font-size:1.25rem;margin-bottom:14px">Continue learning</h2>
+    ${enrolledCourses.length ? `<div class="grid g3" style="margin-bottom:38px">
+      ${enrolledCourses.map(c=>{
+        const p = S.progress[c.id]||0;
+        return `<div class="card" style="display:flex;flex-direction:column;gap:10px">
+          <span class="eyebrow">${esc(c.cat)}</span><h3 style="margin:0">${esc(c.title)}</h3>
+          <div class="bar"><i style="width:${p}%"></i></div>
+          <p class="meta">${p}% complete</p>
+          ${p>=100
+            ? `<button class="btn sm ghost" data-cert="${c.id}">View certificate</button>`
+            : `<button class="btn sm" data-learn="${c.id}">Continue — next lesson</button>`}
+        </div>`;}).join('')}
+    </div>` : `<div class="note" style="margin-bottom:38px">No courses yet. <a href="#/courses">Explore Courses</a> to begin — your project allocation follows course completion.</div>`}
+
+    <h2 class="sec" style="font-size:1.25rem;margin-bottom:14px">My Project</h2>
+    ${proj ? (()=>{ const pp = S.projProgress[proj.id]||0; return `
+    <div class="split" style="margin-bottom:38px">
+      <div class="card" style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap">
+          <div><span class="eyebrow">${esc(proj.industry)}</span><h3 style="margin:0;font-size:1.2rem">${esc(proj.name)}</h3></div>
+          <span class="pill">Your Role: ${esc(proj.role)}</span>
+        </div>
+        <div><p class="meta" style="margin-bottom:6px">Project progress: ${pp}%</p>
+        <div class="bar"><i style="width:${pp}%"></i></div></div>
+        <p class="meta"><b>Current problem:</b> ${esc(proj.currentProblem)}</p>
+        <ul class="list">
+          ${proj.tasks.map(t=>{ const st = taskState(t); return `
+          <li class="row-item">
+            <div><div class="t">${esc(t.title)}</div><div class="d">Deadline: ${esc(t.due)} · ${t.points} points</div></div>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end">
+              <span class="pill ${st.cls}">${st.label}</span>
+              <button class="btn sm ghost" data-task="${t.id}" data-proj="${proj.id}">Open</button>
+            </div>
+          </li>`;}).join('')}
+        </ul>
+      </div>
+      <div class="card m-card">
+        <span class="eyebrow">Your mentor</span>
+        <div style="display:flex;gap:14px;align-items:center">
+          <span class="avatar">${initials(proj.mentor)}</span>
+          <div><h3 style="margin:0">${esc(proj.mentor)}</h3><p class="meta" style="margin:0">Startup & Business Mentor</p></div>
+        </div>
+        <div class="row-item" style="width:100%"><div><div class="t">Guidance session</div><div class="d">Friday — 5:00 PM · Google Meet</div></div>
+          <button class="btn sm" data-join="1">Join Session</button></div>
+        <span class="eyebrow" style="margin-top:6px">Q&A with your mentor</span>
+        <div class="qa" id="qaBox" style="width:100%">
+          ${S.qa.map(m=>`<div class="msg ${m.from==='me'?'me':'them'}"><span class="who">${m.from==='me'?'You':esc(proj.mentor)}</span>${esc(m.text)}</div>`).join('') || '<p class="meta">Ask your first question — mentors reply inside the course thread.</p>'}
+        </div>
+        <form id="qaForm" class="stack" style="width:100%;flex-direction:row;gap:8px">
+          <input class="f" name="q" placeholder="Ask your mentor…" required style="flex:1">
+          <button class="btn sm" type="submit">Send</button>
+        </form>
+      </div>
+    </div>`;})() : `
+    <div class="note" style="margin-bottom:38px">No project allocated yet. Complete a course, then TTP assigns you to a suitable startup project — allocation is always TTP's decision. <a href="#/projects">See the live projects</a>.</div>`}
+  </div></section>`;
+}
+
+function notFound(){
+  return `<section class="block"><div class="wrap" style="text-align:center;padding:80px 0">
+    <h2 class="sec">Page not found</h2><p class="sub" style="margin:12px auto 22px">That link doesn't exist. Head back home to continue.</p>
+    <a class="btn" href="#/home">Go to Home</a></div></section>`;
+}
+
+/* ================= MODALS ================= */
+function showModal(html){
+  $('#modalRoot').innerHTML = `<div class="overlay" id="ov"><div class="modal" role="dialog" aria-modal="true">
+    <button class="x" aria-label="Close" onclick="closeModal()">×</button>${html}</div></div>`;
+  $('#ov').addEventListener('click', e=>{ if(e.target.id==='ov') closeModal(); });
+}
+function closeModal(){ $('#modalRoot').innerHTML=''; }
+
+function openCheckout(id){
+  const c = COURSES.find(x=>x.id===id); if(!c) return;
+  if(!S.user){ toast('Create an account first — checkout needs a participant login.'); location.hash='#/register'; return; }
+  showModal(`
+    <h3>Checkout</h3>
+    <div class="orow"><span>${esc(c.title)}</span><span>${inr(c.price)}</span></div>
+    <div class="orow"><span>Payment method</span><span>Razorpay · UPI / Card</span></div>
+    <div class="orow total"><span>Total</span><span>${inr(c.price)}</span></div>
+    <div class="note" style="margin:16px 0">Preview build — no money moves and no card details are asked for. The production site takes real ₹ payments through Razorpay.</div>
+    <button class="btn wide" onclick="payDemo('${c.id}')">Simulate successful payment</button>`);
+}
+function payDemo(id){
+  if(!S.enrolled.includes(id)) S.enrolled.push(id);
+  if(!(id in S.progress)) S.progress[id]=0;
+  save(); closeModal(); toast('Payment successful — course added to your dashboard.');
+  location.hash = '#/dashboard';
+}
+
+function openTask(projId, taskId){
+  const p = PROJECTS.find(x=>x.id===projId); if(!p) return;
+  const t = p.tasks.find(x=>x.id===taskId); if(!t) return;
+  const st = S.tasks[t.id];
+  let body='';
+  if(st && st.status==='approved'){
+    body = `<div class="note" style="margin-bottom:14px"><b>Mentor feedback (${esc(st.marks||'')}):</b> ${esc(st.feedback||'')}</div>
+      <p class="meta"><b>Your submission:</b> ${esc(st.submission||'')}</p>`;
+  } else if(st && st.status==='submitted'){
+    body = `<div class="note" style="margin-bottom:14px">Submitted — waiting for mentor review. Feedback appears on this task.</div>
+      <p class="meta"><b>Your submission:</b> ${esc(st.submission||'')}</p>`;
+  } else {
+    body = `<form class="stack" id="taskForm" data-task="${t.id}">
+      <label class="f">Your work (text)<textarea class="f" name="text" rows="4" required placeholder="Paste your findings or a summary…"></textarea></label>
+      <label class="f">Attachment name (optional)<input class="f" name="file" placeholder="e.g. competitor-comparison.xlsx"></label>
+      <button class="btn wide" type="submit">Submit Work</button>
+    </form>`;
+  }
+  showModal(`<h3>${esc(t.title)}</h3>
+    <p class="meta" style="margin-bottom:4px">Milestone: ${esc(t.ms)} · Deadline: ${esc(t.due)} · ${t.points} points</p>
+    <p style="font-size:.95rem;margin:10px 0 16px">${esc(t.brief)}</p>${body}`);
+}
+
+function openCert(courseId){
+  const c = COURSES.find(x=>x.id===courseId); if(!c||!S.user) return;
+  const cid = 'TTP-2026-' + (1000 + (courseId.length*137)%9000);
+  showModal(`
+    <h3>Certificate</h3>
+    <div class="cert">
+      <div class="wm">PREVIEW</div>
+      <span class="brand-mark" style="margin:0 auto 10px">TTP</span>
+      <p class="eyebrow">Certificate of Completion</p>
+      <p style="font-size:.85rem;color:var(--muted);margin-top:8px">This certifies that</p>
+      <p class="cn">${esc(S.user.name)}</p>
+      <p style="font-size:.9rem">has successfully completed <b>${esc(c.title)}</b></p>
+      <p class="meta" style="margin-top:6px">Completion date: 12 August 2026 · Certificate ID: ${cid}</p>
+      <div class="sig"><span>Authorised signature</span><span>TTP · Bhopal, MP</span></div>
+    </div>
+    <p class="meta" style="margin-top:12px">Production certificates are issued automatically by Tutor LMS Pro with all six required fields and verify by ID.</p>`);
+}
+
+/* ================= HEADER STATE ================= */
+function renderHead(){
+  $('#headCta').innerHTML = S.user
+    ? `<a class="login-link" href="#/dashboard">Dashboard</a><a class="btn sm" href="#/dashboard">${esc(S.user.name.split(' ')[0])}</a>`
+    : `<a class="login-link" href="#/login">Login</a><a class="btn sm" href="#/register">Get Started</a>`;
+}
+
+/* ================= ROUTER ================= */
+function route(){
+  const h = (location.hash || '#/home').slice(2);
+  const [page, arg] = h.split('/');
+  let html='';
+  switch(page){
+    case 'home': case '': html = pageHome(); break;
+    case 'courses': html = pageCourses(); break;
+    case 'course': html = pageCourse(arg); break;
+    case 'projects': html = pageProjects(); break;
+    case 'project': html = pageProject(arg); break;
+    case 'how': html = pageHow(); break;
+    case 'mentors': html = pageMentors(); break;
+    case 'about': html = pageAbout(); break;
+    case 'contact': html = pageContact(); break;
+    case 'login': html = pageAuth('login'); break;
+    case 'register': html = pageAuth('register'); break;
+    case 'dashboard': html = pageDashboard(); break;
+    default: html = notFound();
+  }
+  $('#view').innerHTML = html;
+  document.querySelectorAll('nav.main a').forEach(a=>{
+    a.classList.toggle('on', a.dataset.nav===page || (page==='' && a.dataset.nav==='home')
+      || (page==='course'&&a.dataset.nav==='courses') || (page==='project'&&a.dataset.nav==='projects'));
+  });
+  $('#mainNav').classList.remove('open');
+  $('#menuBtn').setAttribute('aria-expanded','false');
+  renderHead();
+  window.scrollTo(0,0);
+  bindPage(page);
+}
+
+function bindPage(page){
+  if(page==='courses'){
+    const cq = $('#cq');
+    if(cq) cq.addEventListener('input', e=>{
+      courseFilter.q = e.target.value;
+      // re-render grid only (keep focus)
+      const grid = document.querySelector('.grid.g3');
+      const list = COURSES.filter(c =>
+        (courseFilter.cat==='All' || c.cat===courseFilter.cat) &&
+        (courseFilter.q==='' || (c.title+' '+c.ex+' '+c.cat).toLowerCase().includes(courseFilter.q.toLowerCase())));
+      grid.innerHTML = list.length ? list.map(courseCard).join('') : '<p class="sub">No courses match that search yet. Clear the search to see the full catalogue.</p>';
+    });
+  }
+  const cf = $('#contactForm');
+  if(cf) cf.addEventListener('submit', e=>{
+    e.preventDefault();
+    const fd = new FormData(cf);
+    S.entries.push({name:fd.get('name'), email:fd.get('email'), phone:fd.get('phone'), message:fd.get('message')});
+    save(); cf.reset();
+    toast('Message sent. TTP replies to your email within a working day.');
+  });
+  const af = $('#authForm');
+  if(af) af.addEventListener('submit', e=>{
+    e.preventDefault();
+    const fd = new FormData(af);
+    const email = String(fd.get('email')||'');
+    const name = af.dataset.mode==='register' ? String(fd.get('name')||'Participant') : (email.split('@')[0]||'Participant');
+    S.user = {name: name.charAt(0).toUpperCase()+name.slice(1), email};
+    save(); toast(af.dataset.mode==='register' ? 'Account created — welcome to TTP.' : 'Logged in.');
+    location.hash = '#/dashboard';
+  });
+  const db = $('#demoBtn');
+  if(db) db.addEventListener('click', ()=>{ seedDemo(); toast('Demo participant loaded.'); location.hash='#/dashboard'; });
+  const lb = $('#logoutBtn');
+  if(lb) lb.addEventListener('click', ()=>{
+    S = JSON.parse(JSON.stringify(BLANK)); save();
+    toast('Logged out.'); location.hash='#/home';
+  });
+  const qf = $('#qaForm');
+  if(qf) qf.addEventListener('submit', e=>{
+    e.preventDefault();
+    const q = String(new FormData(qf).get('q')||'').trim(); if(!q) return;
+    S.qa.push({from:'me', text:q}); save(); qf.reset();
+    route();
+    toast('Sent — your mentor replies here and in Friday’s session.');
+  });
+}
+
+/* ================= GLOBAL CLICKS ================= */
+document.addEventListener('click', e=>{
+  const buy = e.target.closest('[data-buy]');
+  if(buy){ openCheckout(buy.dataset.buy); return; }
+  const alloc = e.target.closest('[data-alloc]');
+  if(alloc){
+    const pw = ($('#allocPw')||{}).value||'';
+    if(pw.trim().toLowerCase()==='ttp-abc'){
+      if(!S.allocated.includes(alloc.dataset.alloc)) S.allocated.push(alloc.dataset.alloc);
+      if(!S.user){ S.user={name:'Participant', email:''}; }
+      if(!(alloc.dataset.alloc in S.projProgress)) S.projProgress[alloc.dataset.alloc]=5;
+      save(); toast('Allocated — the project now appears as My Project.');
+      location.hash='#/dashboard';
+    } else {
+      toast('Wrong password. Allocation links and passwords come from TTP.');
+    }
+    return;
+  }
+  const task = e.target.closest('[data-task]');
+  if(task){ openTask(task.dataset.proj, task.dataset.task); return; }
+  const learn = e.target.closest('[data-learn]');
+  if(learn){
+    const id = learn.dataset.learn;
+    S.progress[id] = Math.min(100, (S.progress[id]||0)+10);
+    save(); route();
+    toast(S.progress[id]>=100 ? 'Course complete! Certificate unlocked.' : 'Lesson complete — progress updated.');
+    return;
+  }
+  const cert = e.target.closest('[data-cert]');
+  if(cert){ openCert(cert.dataset.cert); return; }
+  const join = e.target.closest('[data-join]');
+  if(join){ toast('Preview build — the production button opens the mentor’s Google Meet room.'); return; }
+  const cat = e.target.closest('.catbar button');
+  if(cat){ courseFilter.cat = cat.dataset.cat; route(); return; }
+});
+
+document.addEventListener('submit', e=>{
+  const tf = e.target.closest('#taskForm');
+  if(tf){
+    e.preventDefault();
+    const fd = new FormData(tf);
+    const id = tf.dataset.task;
+    S.tasks[id] = {status:'submitted', submission:String(fd.get('text')||'') + (fd.get('file')?' [file: '+fd.get('file')+']':'')};
+    const proj = PROJECTS.find(p=>p.tasks.some(t=>t.id===id));
+    if(proj) S.projProgress[proj.id] = Math.min(100, (S.projProgress[proj.id]||0)+15);
+    save(); closeModal(); route();
+    toast('Work submitted — your mentor reviews it and feedback appears on this task.');
+  }
+});
+
+$('#menuBtn').addEventListener('click', ()=>{
+  const nav = $('#mainNav');
+  const open = nav.classList.toggle('open');
+  $('#menuBtn').setAttribute('aria-expanded', String(open));
+});
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+window.addEventListener('hashchange', route);
+route();
+</script>
+</body>
+</html>
